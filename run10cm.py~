@@ -1,6 +1,0 @@
-import time
-import easygopigo3
-pi = easygopigo3.EasyGoPiGo3()
-
-pi.drive_cm(10) #Blocking method. Move 5cm.
-print('5cm Moved')
