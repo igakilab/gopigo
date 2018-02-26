@@ -16,6 +16,5 @@ if __name__ == '__main__':
                 print(img)
 
                 cv2.imshow(WINNAME, img)
-                key = cv2.waitKey(10)
-                if key%256 == ord('q'):
+                if cv2.waitKey(10) & 0xFF == ord('q'):
 					sys.exit(1)

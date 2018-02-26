@@ -21,6 +21,5 @@ if __name__ == '__main__':
         #frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
         cv2.imshow(WINNAME, cv2.resize(frame, (640,480)))
 
-        key = cv2.waitKey(10)
-        if key%256 == ord('q'):
+        if cv2.waitKey(10) & 0xFF == ord('q'):
             break
