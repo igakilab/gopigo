@@ -1,4 +1,4 @@
-import getch
+import getch # Key input library
 import easygopigo3
 egpi = easygopigo3.EasyGoPiGo3()
 egpi.set_speed(50) #0~1000 sitei

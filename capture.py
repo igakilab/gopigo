@@ -3,6 +3,7 @@ import getch
 import picamera
 
 camera = picamera.PiCamera()
+#camera.start_preview()
 w = getch.getch()
 while w!='e':
     camera.resolution = (1024,768)
