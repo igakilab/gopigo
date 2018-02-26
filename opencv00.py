@@ -1,5 +1,5 @@
 import cv2
-import numpy as np
+import numpy
 import sys
 
 WINNAME = "OpenCV Sample 00"
@@ -8,7 +8,7 @@ HEIGHT = 480
 
 if __name__ == '__main__':
     cv2.namedWindow(WINNAME)
-    img = np.zeros((HEIGHT, WIDTH, 3))
+    img = numpy.zeros((HEIGHT, WIDTH, 3))
     for r in range(256):
         for g in range(256):
             for b in range(256):

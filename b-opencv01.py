@@ -1,9 +1,9 @@
 import cv2
 import picamera
 import io
-import numpy as np
+import numpy
 
-WINNAME = "OpenCV Sample 01-a"
+WINNAME = "OpenCV Sample 01"
 WIDTH = 640
 HEIGHT = 480
 
@@ -15,7 +15,7 @@ if __name__ == '__main__':
         camera.resolution = (800,600)
         imgStream = io.BytesIO() # Temporaly storage area
         camera.capture(imgStream, format='jpeg') #capture as jpeg format image
-        data = np.fromstring(imgStream.getvalue(), dtype=np.uint8) # translate numpy
+        data = numpy.fromstring(imgStream.getvalue(), dtype=numpy.uint8) # translate numpy
         frame = cv2.imdecode(data, 1) #data to image
         
         #frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
