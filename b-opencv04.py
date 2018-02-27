@@ -64,4 +64,5 @@ if __name__ == '__main__':
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
         elif cv2.waitKey(10) & 0xFF == ord('s'):
-            cv2.imwrite("capture04.jpg", res)
+            cv2.imwrite("capture04.jpg", frame)
+            print("captured")
