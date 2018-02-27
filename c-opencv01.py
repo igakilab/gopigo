@@ -9,6 +9,7 @@ WIDTH = 800
 HEIGHT = 600
 camera = picamera.PiCamera(resolution=(WIDTH,HEIGHT),framerate=10)
 
+# ref:http://picamera.readthedocs.io/en/release-1.12/recipes1.html#capturing-consistent-images
 def init_camera():
     # Set ISO to the desired value
     camera.iso = 100

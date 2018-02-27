@@ -3,6 +3,7 @@ import numpy
 from numpy.random import randint
 import picamera
 import io
+import time
 
 WINNAME = "OpenCV Sample 04"
 WIDTH = 800
@@ -62,4 +63,5 @@ if __name__ == '__main__':
         key = cv2.waitKey(10)
         if cv2.waitKey(10) & 0xFF == ord('q'):
             break
-qqqqqqq
+        elif cv2.waitKey(10) & 0xFF == ord('s'):
+            cv2.imwrite("capture04.jpg", res)
