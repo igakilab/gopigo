@@ -3,9 +3,10 @@ import easygopigo3
 egpi = easygopigo3.EasyGoPiGo3()
 egpi.set_speed(50) #0~1000 sitei
 
-w = getch.getch()
-while w!='e' :
-    if (w=='w') :
+while True:
+    w = getch.getch()
+    print(w)
+    if w=='w' :
         egpi.forward()
     elif w=='s' :
         egpi.backward()
@@ -15,4 +16,6 @@ while w!='e' :
         egpi.left()
     elif w=='x':
         egpi.stop()
-    w = getch.getch()
+    elif w=='q':
+        break
+    
