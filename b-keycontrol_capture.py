@@ -50,5 +50,7 @@ if __name__ == '__main__':
         elif key == ord('x'):
             egpi.stop()
         elif key == ord('p'):
-            cv2.imwrite("gopigo_capture.jpg",frame)
-            print("captured"+str(int(time.time()*1000)-1519000000000))
+            #use epoch(unix) milliseconds lower 9 digits
+            filename = "capture" + str(int(time.time()*1000)-1519000000000) + ".jpg"
+            cv2.imwrite(filename,frame)
+            print("captured")
