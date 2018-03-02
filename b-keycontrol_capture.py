@@ -51,4 +51,4 @@ if __name__ == '__main__':
             egpi.stop()
         elif key == ord('p'):
             cv2.imwrite("gopigo_capture.jpg",frame)
-            print("captured")
+            print("captured"+str(int(time.time()*1000)-1519000000000))
