@@ -9,9 +9,9 @@ WINNAME = "OpenCV Sample 04"
 WIDTH = 800
 HEIGHT = 600
 
-#pickup color hsv value:109 214 117
-lower = numpy.array([100, 100, 100], dtype = "uint8")
-upper = numpy.array([120, 255, 255], dtype = "uint8")
+#pickup color hsv value:178 229 98
+lower = numpy.array([170, 100, 50], dtype = "uint8")
+upper = numpy.array([190, 255, 255], dtype = "uint8")
 
 #blue color
 #lower = numpy.array([110, 100, 100], dtype = "uint8")
