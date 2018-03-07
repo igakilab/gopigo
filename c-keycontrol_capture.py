@@ -25,7 +25,7 @@ def init_camera():
 
 if __name__ == '__main__':
     egpi = easygopigo3.EasyGoPiGo3()
-    egpi.set_speed(50) #0~1000 sitei
+    egpi.set_speed(100) #0~1000 sitei
     cv2.namedWindow(WINNAME)
     init_camera()    
     
@@ -51,5 +51,5 @@ if __name__ == '__main__':
         elif key == ord('p'):
             #use epoch(unix) milliseconds lower 9 digits
             filename = "capture" + str(int(time.time()*1000)-1519000000000) + ".jpg"
-            cv2.imwrite(filename,frame)
+            cv2.imwrite(filename,image)
             print("captured")
