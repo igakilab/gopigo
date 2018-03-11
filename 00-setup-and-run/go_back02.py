@@ -27,4 +27,3 @@ if __name__ == '__main__':
         elif (gpg.pi.target_reached(gpg.left_motor2,gpg.right_motor2) == True):
             gpg.pi.stop()
             break;
-            
