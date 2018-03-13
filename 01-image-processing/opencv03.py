@@ -16,10 +16,6 @@ class cv_control:
         self.lower = numpy.array([self.color_hbase-10, 100, 100], dtype = "uint8")
         self.upper = numpy.array([self.color_hbase+10, 255, 255], dtype = "uint8")
     
-    # Show image on the window named "winname"
-    def show_image(self,winname,image):
-        cv2.imshow(winname,image)
-
     # detect_color(self,frame) detects color regions between self.lower and self.upper.        
     def detect_color(self,frame):
         self.update_filter(self.color_hbase)
@@ -33,8 +29,8 @@ class cv_control:
         hueMat = cv2.dilate(hueMat,kernel,iterations = 6)
         hueMat = cv2.erode(hueMat,kernel,iterations = 3)
 
-        image[hueMat == 255] = (0, 255, 0)
-        self.show_image("OpenCV Sample03",image)
+        image[hueMat == 255] = (0, 255, 0) # Convert white to green
+        cv2.imshow("OpenCV Sample03",image)
         
 
 class gopigo_control:
