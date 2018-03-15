@@ -6,6 +6,10 @@ class vision_system:
     def __init__(self):
         self.host = "150.89.234.226" #Vision System IP
         self.port = 7777
+        self.shooter_id = 1
+        self.target1_id = 13
+        self.shooter = [] #position and orientation
+        self.target1 = []
 
     def client_start(self):
         sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #create socket
@@ -17,9 +21,29 @@ class vision_system:
         while True:
             if status.vs_mode == "print":
                 response = sock.recv(4096)
-                print("response = " + response)
+                self.vs_to_marker(response)
             elif status.vs_mode == "quit":
                 break
+    
+    def vs_to_marker(self,response):
+        r_lines = response.split('\r\n')
+        for line in r_lines:
+            if line =="": # delete last blank line
+                break;
+            vs_marker_str = line.split(' ') #split vsdata
+            if(len(vs_marker_str)<5):
+                break
+            try:
+                vs_marker = [float(vs_marker_str[0]),float(vs_marker_str[1]),float(vs_marker_str[2]),float(vs_marker_str[3]),float(vs_marker_str[4])]
+            except ValueError:
+                print("could not convert string to float in vs_marker convert")
+                break
+            if int(vs_marker[0])==self.shooter_id:
+                self.shooter = vs_marker[1:]
+                print("shooter: "+str(self.shooter))
+            elif int(vs_marker[0])==self.target1_id:
+                self.target1 = vs_marker[1:]
+                print("target1: "+str(self.target1))
 
 class status:
     def __init__(self):
@@ -53,3 +77,5 @@ if __name__ == "__main__":
     stdscr.keypad(0)
     curses.echo()
     curses.endwin()
+    
+    
