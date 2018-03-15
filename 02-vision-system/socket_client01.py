@@ -1,6 +1,5 @@
 import socket
 
-#host = "169.254.179.215" #Vision System IP
 host = "150.89.234.226" #Vision System IP
 port = 7777
 
