@@ -1,24 +1,30 @@
 import socket
 import threading
 import curses
+import time
+import select
 
 class vision_system:
     def __init__(self):
         self.host = "150.89.234.226" #Vision System IP
         self.port = 7777
-
+        self.socket_timeout = 0.05
+        self.socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #create socket
+        
     def client_start(self):
-        sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #create socket
-        sock.connect((self.host,self.port)) # connect
-        handle_thread = threading.Thread(target=self.handler, args=(sock,status,))
+        self.socket.connect((self.host,self.port)) # connect
+        handle_thread = threading.Thread(target=self.handler, args=(status,))
         handle_thread.start()
 
-    def handler(self,sock,status):
+    def handler(self,status):
         while True:
-            if status.vs_mode == "print":
-                response = sock.recv(4096)
-                print("response = " + response)
+            time.sleep(0.01)
+            read_sockets, write_sockets, error_sockets = select.select([self.socket], [], [], self.socket_timeout)
+            if read_sockets and status.vs_mode == "print":
+                response = self.socket.recv(4096)
+                print(response)
             elif status.vs_mode == "quit":
+                self.socket.close()
                 break
 
 class status:

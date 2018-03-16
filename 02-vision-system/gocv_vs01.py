@@ -1,35 +1,42 @@
 import socket
 import threading
 import curses
+import time
+import select
 import easygopigo3
 import picamera
 import picamera.array
-import time
 import cv2
 
 class vision_system:
     def __init__(self):
         self.host = "150.89.234.226" #Vision System IP
         self.port = 7777
+        self.socket_timeout = 0.05
+        self.socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #create socket
+        
         self.shooter_id = 1
         self.target1_id = 13
         self.shooter = [] #position and orientation
         self.target1 = []
-
+        
     def client_start(self):
-        sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #create socket
-        sock.connect((self.host,self.port)) # connect
-        handle_thread = threading.Thread(target=self.handler, args=(sock,status,))
+        self.socket.connect((self.host,self.port)) # connect
+        handle_thread = threading.Thread(target=self.handler, args=(status,))
         handle_thread.start()
 
-    def handler(self,sock,status):
+    def handler(self,status):
         while True:
-            if status.vs_mode == "print":
-                response = sock.recv(4096)
+            time.sleep(0.01)
+            read_sockets, write_sockets, error_sockets = select.select([self.socket], [], [], self.socket_timeout)
+            if read_sockets and status.vs_mode == "print":
+                response = self.socket.recv(4096)
                 self.vs_to_marker(response)
             elif status.vs_mode == "quit":
+                self.socket.close()
                 break
-    
+
+    # Convert vs info to marker list
     def vs_to_marker(self,response):
         r_lines = response.split('\r\n')
         for line in r_lines:
@@ -74,23 +81,20 @@ class gopigo_control:
         self.camera.capture(cap_stream, format='bgr',use_video_port=True)
         frame = cap_stream.array
         return frame
-        
+
 class status:
     def __init__(self):
         self.vs_mode = "noprint" #noprint/print/quit
         
 if __name__ == "__main__":
-
     vs = vision_system()
     status = status()
     gpgc = gopigo_control()
     vs.client_start() #multi-thread(non-blocking) mode
     
     while True:
-        time.sleep(0.5)
         frame = gpgc.capture_frame()
         cv2.imshow("go_cv01",frame)
-        #cv2.namedWindow("go_cv01")
         
         if cv2.waitKey(10)%256 == ord('q'):
             status.vs_mode = "quit"
