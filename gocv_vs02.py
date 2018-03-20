@@ -6,20 +6,16 @@ import select
 import easygopigo3
 import numpy
 import math
-import datetime
 
 class vision_system:
     def __init__(self):
         self.host = "150.89.234.226" #Vision System IP
         self.port = 7777
         self.socket_timeout = 0.05
-        self.updated = datetime.datetime.now()
         self.socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #create socket
         
         self.shooter_id = 1
         self.target1_id = 13
-        self.shooter_is_moved = False
-        self.target1_is_moved = False
         self.shooter = [] #position and orientation
         self.target1 = []
         
@@ -35,7 +31,7 @@ class vision_system:
             if read_sockets:
                 response = self.socket.recv(4096)
                 self.vs_to_marker(response)
-            elif gstat.vs_mode == "quit":
+            if gstat.vs_mode == "quit":
                 self.socket.close()
                 break
 
@@ -55,27 +51,18 @@ class vision_system:
                 break
             if int(vs_marker[0])==self.shooter_id:
                 self.shooter = vs_marker[1:]
-                self.updated = datetime.datetime.now()
+                #print("shooter: "+str(self.shooter))
             elif int(vs_marker[0])==self.target1_id:
                 self.target1 = vs_marker[1:]
-                self.updated = datetime.datetime.now()
                 #print("target1: "+str(self.target1))
-        
 
 class gopigo_control:
-    def __init__(self,screen):
-        self.screen = stdscr
+    def __init__(self):
         self.pi = easygopigo3.EasyGoPiGo3()
         self.pi.set_speed(50)
-        
-    def calcDistance(self,pos1,pos2):
-        pass
-        
-    def calcDegree(self,pos1,pos2):
-        pass
 
     # my_gopigo and target have position and orientation information from vision system.
-    def turn_to_target(self,my_gopigo,target,updated_time):
+    def turn_to_target(self,my_gopigo,target,screen):
         #print("gopigo"+str(my_gopigo))
         if len(my_gopigo)<4 or len(target)<4:
             return
@@ -91,12 +78,12 @@ class gopigo_control:
             gopigo_to_target = gopigo_to_target -360
         elif (gopigo_to_target < -180):
             gopigo_to_target = 360 + gopigo_to_target
-        self.screen.move(1,0)
-        self.screen.clrtoeol()
-        self.screen.addstr(1,0,"gopigo_to_target:"+str(gopigo_to_target))
+        #print("gopigo_to_target" + str(gopigo_to_target))
+        screen.move(1,0)
+        screen.clrtoeol()
+        screen.addstr(1,0,str(gopigo_to_target))
         
-        # if marker info is not updated in 0.5 seconds, gopigo will stop.
-        if abs(gopigo_to_target) > 10 and (datetime.datetime.now() - updated_time).total_seconds()*1000 <500:
+        if abs(gopigo_to_target) > 10:
             self.pi.turn_degrees(gopigo_to_target,blocking=False)
         else:
             self.pi.stop()
@@ -113,11 +100,11 @@ if __name__ == "__main__":
 
     vs = vision_system()
     gstat = gopigo_status()
-    gpgc = gopigo_control(stdscr) # To print strings on the stdscr
+    gpgc = gopigo_control()
     vs.client_start(gstat) #multi-thread(non-blocking) mode
     
     while True:
-        gpgc.turn_to_target(vs.shooter,vs.target1,vs.updated)
+        gpgc.turn_to_target(vs.shooter,vs.target1,stdscr)
         w = stdscr.getch() #non blocking, getch() returns int value
         if w==ord('q'):
             print("end")

@@ -6,14 +6,12 @@ import select
 import easygopigo3
 import numpy
 import math
-import datetime
 
 class vision_system:
     def __init__(self):
         self.host = "150.89.234.226" #Vision System IP
         self.port = 7777
         self.socket_timeout = 0.05
-        self.updated = datetime.datetime.now()
         self.socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #create socket
         
         self.shooter_id = 1
@@ -54,12 +52,36 @@ class vision_system:
                 print("could not convert string to float in vs_marker convert")
                 break
             if int(vs_marker[0])==self.shooter_id:
-                self.shooter = vs_marker[1:]
-                self.updated = datetime.datetime.now()
+                if self.is_moved(self.shooter,vs_marker[1:]):
+                    self.shooter = vs_marker[1:]
+                    self.shooter_is_moved = True
+                else:
+                    self.shooter_is_moved = False
             elif int(vs_marker[0])==self.target1_id:
-                self.target1 = vs_marker[1:]
-                self.updated = datetime.datetime.now()
+                if self.is_moved(self.target1,vs_marker[1:]):
+                    self.target1 = vs_marker[1:]
+                    self.target1_is_moved = True
+                else:
+                    self.target1_is_moved = False
                 #print("target1: "+str(self.target1))
+    
+    def is_moved(self,oldmarker,newmarker):
+        if len(oldmarker)<4 or len(newmarker)<4:
+            return True
+        old = numpy.array(oldmarker)
+        new = numpy.array(newmarker)
+        diff = new - old
+        distance = numpy.sqrt(diff[0]**2 + diff[1]**2)
+        
+        old_ort_deg = numpy.rad2deg(math.atan2(old[3],old[2]))
+        new_ort_deg = numpy.rad2deg(math.atan2(new[3],new[2]))        
+        ord_to_new = abs(new_ort_deg - old_ort_deg)
+        
+        # if marker is moved (over 25px or 5 degree)
+        if distance >= 25 or ord_to_new >= 5:
+            return True
+        else:
+            return False
         
 
 class gopigo_control:
@@ -67,15 +89,9 @@ class gopigo_control:
         self.screen = stdscr
         self.pi = easygopigo3.EasyGoPiGo3()
         self.pi.set_speed(50)
-        
-    def calcDistance(self,pos1,pos2):
-        pass
-        
-    def calcDegree(self,pos1,pos2):
-        pass
 
     # my_gopigo and target have position and orientation information from vision system.
-    def turn_to_target(self,my_gopigo,target,updated_time):
+    def turn_to_target(self,my_gopigo,target):
         #print("gopigo"+str(my_gopigo))
         if len(my_gopigo)<4 or len(target)<4:
             return
@@ -95,8 +111,7 @@ class gopigo_control:
         self.screen.clrtoeol()
         self.screen.addstr(1,0,"gopigo_to_target:"+str(gopigo_to_target))
         
-        # if marker info is not updated in 0.5 seconds, gopigo will stop.
-        if abs(gopigo_to_target) > 10 and (datetime.datetime.now() - updated_time).total_seconds()*1000 <500:
+        if abs(gopigo_to_target) > 10:
             self.pi.turn_degrees(gopigo_to_target,blocking=False)
         else:
             self.pi.stop()
@@ -117,7 +132,7 @@ if __name__ == "__main__":
     vs.client_start(gstat) #multi-thread(non-blocking) mode
     
     while True:
-        gpgc.turn_to_target(vs.shooter,vs.target1,vs.updated)
+        gpgc.turn_to_target(vs.shooter,vs.target1)
         w = stdscr.getch() #non blocking, getch() returns int value
         if w==ord('q'):
             print("end")
