@@ -16,6 +16,8 @@ class vision_system:
         
         self.shooter_id = 1
         self.target1_id = 13
+        self.shooter_is_moved = False
+        self.target1_is_moved = False
         self.shooter = [] #position and orientation
         self.target1 = []
         
@@ -50,19 +52,46 @@ class vision_system:
                 print("could not convert string to float in vs_marker convert")
                 break
             if int(vs_marker[0])==self.shooter_id:
-                self.shooter = vs_marker[1:]
-                #print("shooter: "+str(self.shooter))
+                if self.is_moved(self.shooter,vs_marker[1:]):
+                    self.shooter = vs_marker[1:]
+                    self.shooter_is_moved = True
+                else:
+                    self.shooter_is_moved = False
             elif int(vs_marker[0])==self.target1_id:
-                self.target1 = vs_marker[1:]
+                if self.is_moved(self.target1,vs_marker[1:]):
+                    self.target1 = vs_marker[1:]
+                    self.target1_is_moved = True
+                else:
+                    self.target1_is_moved = False
                 #print("target1: "+str(self.target1))
+    
+    def is_moved(self,oldmarker,newmarker):
+        if len(oldmarker)<4 or len(newmarker)<4:
+            return True
+        old = numpy.array(oldmarker)
+        new = numpy.array(newmarker)
+        diff = new - old
+        distance = numpy.sqrt(diff[0]**2 + diff[1]**2)
+        
+        old_ort_deg = numpy.rad2deg(math.atan2(old[3],old[2]))
+        new_ort_deg = numpy.rad2deg(math.atan2(new[3],new[2]))        
+        ord_to_new = abs(new_ort_deg - old_ort_deg)
+        
+        # if marker is moved (over 25px or 5 degree)
+        if distance >= 25 or ord_to_new >= 5:
+            return True
+        else:
+            return False
+        
 
 class gopigo_control:
-    def __init__(self):
+    def __init__(self,screen):
+        self.screen = stdscr
         self.pi = easygopigo3.EasyGoPiGo3()
         self.pi.set_speed(50)
 
     # my_gopigo and target have position and orientation information from vision system.
-    def turn_to_target(self,my_gopigo,target,screen):
+    def turn_to_target(self,my_gopigo,target):
         #print("gopigo"+str(my_gopigo))
         if len(my_gopigo)<4 or len(target)<4:
             return
@@ -78,10 +107,9 @@ class gopigo_control:
             gopigo_to_target = gopigo_to_target -360
         elif (gopigo_to_target < -180):
             gopigo_to_target = 360 + gopigo_to_target
-        #print("gopigo_to_target" + str(gopigo_to_target))
-        screen.move(1,0)
-        screen.clrtoeol()
-        screen.addstr(1,0,str(gopigo_to_target))
+        self.screen.move(1,0)
+        self.screen.clrtoeol()
+        self.screen.addstr(1,0,"gopigo_to_target:"+str(gopigo_to_target))
         
         if abs(gopigo_to_target) > 10:
             self.pi.turn_degrees(gopigo_to_target,blocking=False)
@@ -100,11 +128,11 @@ if __name__ == "__main__":
 
     vs = vision_system()
     status = status()
-    gpgc = gopigo_control()
+    gpgc = gopigo_control(stdscr) # To print strings on the stdscr
     vs.client_start() #multi-thread(non-blocking) mode
     
     while True:
-        gpgc.turn_to_target(vs.shooter,vs.target1,stdscr)
+        gpgc.turn_to_target(vs.shooter,vs.target1)
         w = stdscr.getch() #non blocking, getch() returns int value
         if w==ord('q'):
             print("end")
