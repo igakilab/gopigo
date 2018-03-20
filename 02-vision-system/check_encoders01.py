@@ -18,20 +18,21 @@ class vision_system:
         self.shooter = [] #position and orientation
         self.target1 = []        
         
-    def client_start(self,status):
+    def client_start(self,gstat):
         self.socket.connect((self.host,self.port)) # connect
-        handle_thread = threading.Thread(target=self.handler, args=(status,))
+        handle_thread = threading.Thread(target=self.handler, args=(gstat,))
         handle_thread.start()
 
     def handler(self,status):
         while True:
             time.sleep(0.01)
             read_sockets, write_sockets, error_sockets = select.select([self.socket], [], [], self.socket_timeout)
-            if read_sockets == True and status.vs_mode == True:
+            if read_sockets:
+                #print("marker updated")
                 response = self.socket.recv(4096)
                 self.vs_to_marker(response)
-                print("marker updated")
-            elif status.vs_mode == False:
+                
+            if status.vs_mode == False:
                 break
 
     # Convert vs info to marker list
@@ -60,19 +61,8 @@ class gopigo_control:
         self.pi = easygopigo3.EasyGoPiGo3()
         self.pi.set_speed(50)
     
-    # move forward and calculate distance value as px and degrees
-    def move(self,degree,gopigo):
-        pre_gpg = copy.deepcopy(gopigo)
-        self.pi.reset_encoders()
-        print("move_forward(pre):"+str(degree)+"deg,"+str(pre_gpg)+":encoders:"+str(self.pi.read_encoders()))
-        self.pi.drive_degrees(degree,blocking=True) #Blocking method
-        post_gpg = copy.deepcopy(gopigo)
-        print("move_forward(post):"+str(degree)+"deg,"+str(gopigo)+":encoders:"+str(self.pi.read_encoders()))
-        diff = numpy.array(pre_gpg) - numpy.array(post_gpg)
-        distance_px = numpy.sqrt(diff[0]**2 + diff[1]**2)
-        print("distance_px="+str(distance_px))
 
-class status:
+class gopigo_status:
     def __init__(self):
         self.vs_mode = True #T/F
         
@@ -80,10 +70,30 @@ if __name__ == "__main__":
 
     vs = vision_system()
     gpgc = gopigo_control()
-    stat = status()
-    vs.client_start(stat) #multi-thread(non-blocking) mode
-    time.sleep(5)
+    gstat = gopigo_status()
+    vs.client_start(gstat) #multi-thread(non-blocking) mode
+    time.sleep(2)
+    gpgc.pi.reset_encoders()
+    degree = 180
     
-    gpgc.move(360,vs.shooter)
-    stat.vs_mode = False
+    # gopigo_pos before drive_degrees
+    pre_gpg = copy.deepcopy(vs.shooter)
+    print("forward(pre):"+str(degree)+"deg,"+str(pre_gpg)+":encoders:"+str(gpgc.pi.read_encoders()))
+    
+    gpgc.pi.drive_degrees(degree,blocking=True) #Blocking method
+    #gpgc.pi.turn_degrees(degree,blocking=True)
+    time.sleep(1)
+    
+    # gopigo_pos after drive_degrees
+    post_gpg = copy.deepcopy(vs.shooter)
+    print("forward(post):"+str(degree)+"deg,"+str(post_gpg)+":encoders:"+str(gpgc.pi.read_encoders()))
 
+    # Calc diff between pre and post
+    diff = numpy.array(pre_gpg) - numpy.array(post_gpg)
+    distance_px = numpy.sqrt(diff[0]**2 + diff[1]**2)
+    
+    # Calc distance(px value) per degree
+    print("distance_px="+str(distance_px))
+    gstat.vs_mode = False
+    
+    

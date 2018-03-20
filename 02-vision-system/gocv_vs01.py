@@ -20,19 +20,19 @@ class vision_system:
         self.shooter = [] #position and orientation
         self.target1 = []
         
-    def client_start(self):
+    def client_start(self,gstat):
         self.socket.connect((self.host,self.port)) # connect
-        handle_thread = threading.Thread(target=self.handler, args=(status,))
+        handle_thread = threading.Thread(target=self.handler, args=(gstat,))
         handle_thread.start()
 
-    def handler(self,status):
+    def handler(self,gstat):
         while True:
             time.sleep(0.01)
             read_sockets, write_sockets, error_sockets = select.select([self.socket], [], [], self.socket_timeout)
-            if read_sockets and status.vs_mode == "print":
+            if read_sockets and gstat.vs_mode == "print":
                 response = self.socket.recv(4096)
                 self.vs_to_marker(response)
-            elif status.vs_mode == "quit":
+            elif gstat.vs_mode == "quit":
                 self.socket.close()
                 break
 
@@ -82,24 +82,24 @@ class gopigo_control:
         frame = cap_stream.array
         return frame
 
-class status:
+class gopigo_status:
     def __init__(self):
         self.vs_mode = "noprint" #noprint/print/quit
         
 if __name__ == "__main__":
     vs = vision_system()
-    status = status()
+    gstat = gopigo_status()
     gpgc = gopigo_control()
-    vs.client_start() #multi-thread(non-blocking) mode
+    vs.client_start(gstat) #multi-thread(non-blocking) mode
     
     while True:
         frame = gpgc.capture_frame()
         cv2.imshow("go_cv01",frame)
         
         if cv2.waitKey(10)%256 == ord('q'):
-            status.vs_mode = "quit"
+            gstat.vs_mode = "quit"
             break
         elif cv2.waitKey(10)%256 == ord('p'):
-            status.vs_mode = "print"
+            gstat.vs_mode = "print"
         elif cv2.waitKey(10)%256 == ord('n'):
-            status.vs_mode = "noprint"
+            gstat.vs_mode = "noprint"

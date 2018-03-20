@@ -21,19 +21,19 @@ class vision_system:
         self.shooter = [] #position and orientation
         self.target1 = []
         
-    def client_start(self):
+    def client_start(self,gstat):
         self.socket.connect((self.host,self.port)) # connect
-        handle_thread = threading.Thread(target=self.handler, args=(status,))
+        handle_thread = threading.Thread(target=self.handler, args=(gstat,))
         handle_thread.start()
 
-    def handler(self,status):
+    def handler(self,gstat):
         while True:
             time.sleep(0.01)
             read_sockets, write_sockets, error_sockets = select.select([self.socket], [], [], self.socket_timeout)
             if read_sockets:
                 response = self.socket.recv(4096)
                 self.vs_to_marker(response)
-            elif status.vs_mode == "quit":
+            elif gstat.vs_mode == "quit":
                 self.socket.close()
                 break
 
@@ -116,7 +116,7 @@ class gopigo_control:
         else:
             self.pi.stop()
 
-class status:
+class gopigo_status:
     def __init__(self):
         self.vs_mode = "run" #run/quit
         
@@ -127,16 +127,16 @@ if __name__ == "__main__":
     curses.noecho()
 
     vs = vision_system()
-    status = status()
+    gstat = gopigo_status()
     gpgc = gopigo_control(stdscr) # To print strings on the stdscr
-    vs.client_start() #multi-thread(non-blocking) mode
+    vs.client_start(gstat) #multi-thread(non-blocking) mode
     
     while True:
         gpgc.turn_to_target(vs.shooter,vs.target1)
         w = stdscr.getch() #non blocking, getch() returns int value
         if w==ord('q'):
             print("end")
-            status.vs_mode="quit"
+            gstat.vs_mode="quit"
             break
 
     #Clean up curses.
