@@ -7,7 +7,6 @@ import easygopigo3
 import numpy
 import math
 import datetime
-import copy
 
 class vision_system:
     def __init__(self):
@@ -88,30 +87,24 @@ class gopigo_control:
         return obj1_to_obj2
 
     # my_gopigo and target have position and orientation information from vision system.
-    # gopigo move to the target position
-    def move(self,my_gopigo,target,updated_time):
+    def turn_to_target(self,my_gopigo,target,updated_time):
         #print("gopigo"+str(my_gopigo))
         if len(my_gopigo)<4 or len(target)<4:
             return
             
-        gopigo_to_target_angle = self.calcAngle(my_gopigo,target)
-        gopigo_to_target_px = self.calcDistance(my_gopigo,target)
-        
+        gopigo_to_target = self.calcAngle(my_gopigo,target)
         # change the value of gopigo_to_target into the range of +-180 degree.
-        if(gopigo_to_target_angle > 180):
-            gopigo_to_target_angle = gopigo_to_target_angle -360
-        elif (gopigo_to_target_angle < -180):
-            gopigo_to_target_angle = 360 + gopigo_to_target_angle
+        if(gopigo_to_target > 180):
+            gopigo_to_target = gopigo_to_target -360
+        elif (gopigo_to_target < -180):
+            gopigo_to_target = 360 + gopigo_to_target
         self.screen.move(1,0)
         self.screen.clrtoeol()
-        self.screen.addstr(1,0,"gopigo_to_target_angle:"+str(gopigo_to_target_angle))
+        self.screen.addstr(1,0,"gopigo_to_target:"+str(gopigo_to_target))
         
         # if marker info is not updated in 0.5 seconds, gopigo will stop.
-        if abs(gopigo_to_target_angle) > 10 and (datetime.datetime.now() - updated_time).total_seconds()*1000 < 500:
-            self.pi.turn_degrees(gopigo_to_target_angle,blocking=False)
-        elif self.calcDistance(my_gopigo,target) > 50:
-            # 4.5 is dependent on the webcamera location of the vision system
-            self.pi.drive_degrees(gopigo_to_target_px*4.5,blocking=False)
+        if abs(gopigo_to_target) > 10 and (datetime.datetime.now() - updated_time).total_seconds()*1000 <500:
+            self.pi.turn_degrees(gopigo_to_target,blocking=False)
         else:
             self.pi.stop()
 
@@ -131,13 +124,7 @@ if __name__ == "__main__":
     vs.client_start(gstat) #multi-thread(non-blocking) mode
     
     while True:
-        if len(vs.target1) < 4:
-            continue
-        shoot_pos = copy.deepcopy(vs.target1)
-        #150 indicates shoot_pos is 150 px in front of the target1
-        shoot_pos[0] = shoot_pos[0]+150*shoot_pos[2]
-        shoot_pos[1] = shoot_pos[1]+150*shoot_pos[3]
-        gpgc.move(vs.shooter,shoot_pos,vs.updated)
+        gpgc.turn_to_target(vs.shooter,vs.target1,vs.updated)
         w = stdscr.getch() #non blocking, getch() returns int value
         if w==ord('q'):
             print("end")
