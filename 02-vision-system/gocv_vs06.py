@@ -8,6 +8,9 @@ import numpy
 import math
 import datetime
 import copy
+import picamera
+import picamera.array
+import cv2
 
 class vision_system:
     def __init__(self):
@@ -97,6 +100,19 @@ class gopigo_control:
         self.pi = easygopigo3.EasyGoPiGo3()
         self.pi.set_speed(100)
         
+        self.width = 640
+        self.height = 480
+        self.camera = picamera.PiCamera(resolution=(self.width,self.height),framerate=10)
+        self.camera.iso = 200
+        # Wait for the automatic gain control to settle
+        time.sleep(2)
+        # Fix the values
+        self.camera.shutter_speed = self.camera.exposure_speed
+        self.camera.exposure_mode = 'off'
+        g = self.camera.awb_gains
+        self.camera.awb_mode = 'off'
+        self.camera.awb_gains = g
+        
     # change the value of gopigo_to_target into the range of +-180 degree.
     def calc_gopigo_degree(self,angle):
         if(angle > 180):
@@ -107,13 +123,24 @@ class gopigo_control:
 
     # my_gopigo and target have position and orientation information from vision system.
     # gopigo move to the target position
-    def move(self,stat):
+    def move(self,stat,frame):
         if stat.gpg_mode == "drive":
             self.pi.drive_degrees(stat.gpg_drive_degree,blocking=False)
         elif stat.gpg_mode == "turn":
             self.pi.turn_degrees(self.calc_gopigo_degree(stat.gpg_turn_degree),blocking=False)
+        elif stat.gpg_mode == "capture":
+            self.pi.stop()
+            filename = "vs06"+ str(stat.photo_num) + ".jpg"
+            cv2.imwrite(filename,frame)
+            stat.photo_num = stat.photo_num + 1
         elif stat.gpg_mode == "stop":
             self.pi.stop()
+            
+    def capture_frame(self):
+        cap_stream = picamera.array.PiRGBArray(self.camera,size=(self.width,self.height))
+        self.camera.capture(cap_stream, format='bgr',use_video_port=True)
+        frame = cap_stream.array
+        return frame
 
 class status:
     def __init__(self):
@@ -121,6 +148,7 @@ class status:
         self.gpg_mode = "stop" #stop/turn/drive/timeout
         self.gpg_turn_degree = 0
         self.gpg_drive_degree = 0
+        self.photo_num = 0
 
 def draw_string_curses(screen,msg,pos):
     screen.move(pos,0)
@@ -152,6 +180,8 @@ if __name__ == "__main__":
         draw_string_curses(stdscr,"to_angle:"+str(gopigo_to_target_angle),4)
         draw_string_curses(stdscr,"to_px:"+str(gopigo_to_target_px),5)
         draw_string_curses(stdscr,"face_angle:"+str(gopigo_face_target_angle),6)
+        
+        frame = gpgc.capture_frame()
 
         if (datetime.datetime.now() - vs.updated).total_seconds()*1000 > 1000:
             # if marker info is not updated in 1 second, gopigo will stop.
@@ -166,11 +196,15 @@ if __name__ == "__main__":
         elif abs(gopigo_face_target_angle) > 10:
             stat.gpg_mode = "turn"
             stat.gpg_turn_degree = gopigo_face_target_angle
-        else:
+        elif stat.gpg_mode == "capture":
             stat.gpg_mode = "stop"
             stat.gpg_drive_degree = stat.gpg_turn_degree = 0
+        elif stat.photo_num < 2:
+            stat.gpg_mode = "capture"
+        else:
+            stat.gpg_mode = "stop"
 
-        gpgc.move(stat)
+        gpgc.move(stat,frame)
         w = stdscr.getch() #non blocking, getch() returns int value
         if w==ord('q'):
             print("end")
