@@ -95,7 +95,7 @@ class vision_system:
 class gopigo_control:
     def __init__(self):
         self.pi = easygopigo3.EasyGoPiGo3()
-        self.pi.set_speed(50)
+        self.pi.set_speed(100)
         
     # change the value of gopigo_to_target into the range of +-180 degree.
     def calc_gopigo_degree(self,angle):
@@ -127,10 +127,15 @@ class gopigo_control:
 class status:
     def __init__(self):
         self.vs_mode = "run" #run/quit
-        self.gpg_mode = "stop" #stop/turn/drive
+        self.gpg_mode = "stop" #stop/turn/drive/timeout
         self.gpg_turn_degree = 0
         self.gpg_drive_degree = 0
-        
+
+def draw_string_curses(screen,msg,pos):
+    screen.move(pos,0)
+    screen.clrtoeol()
+    screen.addstr(pos,0,msg)
+
 if __name__ == "__main__":
     #Curses setup
     stdscr = curses.initscr()
@@ -149,15 +154,21 @@ if __name__ == "__main__":
         gopigo_to_target_angle = vs.calcAngle(vs.shooter,shoot_pos)
         gopigo_to_target_px = vs.calcDistance(vs.shooter,shoot_pos)
         gopigo_face_target_angle = vs.calcOrientation(vs.shooter,shoot_pos)
-        # if marker info is not updated in 0.5 seconds, gopigo will stop.
-        if abs(gopigo_to_target_angle) > 10 and gopigo_to_target_px > 50 and (datetime.datetime.now() - vs.updated).total_seconds()*1000 < 500:
+        draw_string_curses(stdscr,"to_angle:"+str(gopigo_to_target_angle),4)
+        draw_string_curses(stdscr,"to_px:"+str(gopigo_to_target_px),5)
+        draw_string_curses(stdscr,"face_angle:"+str(gopigo_face_target_angle),6)
+
+        if (datetime.datetime.now() - vs.updated).total_seconds()*1000 > 1000:
+            # if marker info is not updated in 1 second, gopigo will stop.
+            stat.gpg_mode = "timeout"
+        elif abs(gopigo_to_target_angle) > 10 and gopigo_to_target_px > 50:
             stat.gpg_mode = "turn"
             stat.gpg_turn_degree = gopigo_to_target_angle
         elif gopigo_to_target_px > 50:
             # 4.7 is dependent on the webcamera location of the vision system
             stat.gpg_mode = "drive"
-            stat.gpg_drive_degree = gopigo_to_target_px*4.5
-        elif gopigo_face_target_angle > 10:
+            stat.gpg_drive_degree = gopigo_to_target_px*4.7
+        elif abs(gopigo_face_target_angle) > 10:
             stat.gpg_mode = "turn"
             stat.gpg_turn_degree = gopigo_face_target_angle
         else:
