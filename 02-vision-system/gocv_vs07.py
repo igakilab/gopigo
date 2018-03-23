@@ -13,17 +13,15 @@ import picamera.array
 import cv2
 
 class vision_system:
-    def __init__(self):
-        self.host = "150.89.234.226" #Vision System IP
-        self.port = 7777
-        self.socket_timeout = 0.05
+    def __init__(self,host,port):
+        self.host = host #Vision System IP
+        self.port = port
+        #self.socket_timeout = 0.05
         self.updated = datetime.datetime.now()
         self.socket = socket.socket(socket.AF_INET,socket.SOCK_STREAM) #create socket
         
-        self.shooter_id = 1
-        self.shooter = [] #position and orientation
-        self.target1_id = 13
-        self.target1 = []
+        # 1,13 are vs-marker id
+        # each marker has 4 values (x,y,orientationx,orientationy)
         self.markers = {1:[],13:[]}
         
     def client_start(self,stat):
@@ -34,13 +32,12 @@ class vision_system:
     def handler(self,stat):
         while True:
             time.sleep(0.01)
-            read_sockets, write_sockets, error_sockets = select.select([self.socket], [], [], self.socket_timeout)
-            if read_sockets:
-                response = self.socket.recv(4096)
-                self.vs_to_marker(response)
-            elif stat.vs_mode == "quit":
+            #read_sockets, write_sockets, error_sockets = select.select([self.socket], [], [], self.socket_timeout)
+            if stat.vs_mode == "quit":
                 self.socket.close()
                 break
+            response = self.socket.recv(4096)
+            self.vs_to_marker(response)
 
     # Convert vs info to marker list
     def vs_to_marker(self,response):
@@ -119,8 +116,6 @@ class gopigo_control:
             angle = 360 + angle
         return angle
 
-    # my_gopigo and target have position and orientation information from vision system.
-    # gopigo move to the target position
     def move(self,stat,frame):
         if stat.gpg_mode == "drive":
             self.pi.drive_degrees(stat.gpg_drive_degree,blocking=False)
@@ -159,12 +154,15 @@ if __name__ == "__main__":
     stdscr.nodelay(1) #non-blocking mode
     curses.noecho()
 
-    vs = vision_system()
+    vs = vision_system("150.89.234.226",7777)
     stat = status()
     gpgc = gopigo_control()
     vs.client_start(stat) #multi-thread(non-blocking) mode
     
     while True:
+        
+        # each marker has 4 values (x,y, orientationx, orientationy)
+        # If at least one marker does not have enough values, "continue".
         marker_length = 0
         for m in vs.markers.values():
            marker_length += len(m) 
