@@ -1,6 +1,5 @@
 import socket
 import curses
-import time
 import select
 
 class vision_system:
