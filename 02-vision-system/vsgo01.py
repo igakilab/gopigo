@@ -74,17 +74,6 @@ class gopigo_control:
             angle = 360 + angle
         return angle
 
-    def move(self,stat):
-        if stat.gpg_mode == "turn":
-            self.pi.turn_degrees(self.calc_gopigo_degree(stat.gpg_turn_degree),blocking=False)
-        elif stat.gpg_mode == "stop":
-            self.pi.stop()
-            
-class status:
-    def __init__(self):
-        self.gpg_mode = "stop" #stop/turn/timeout
-        self.gpg_turn_degree = 0
-
 def draw_string_curses(screen,msg,pos):
     screen.move(pos,0)
     screen.clrtoeol()
@@ -97,7 +86,6 @@ if __name__ == "__main__":
     curses.noecho()
 
     vs = vision_system("150.89.234.226",7777)
-    stat = status()
     gpgc = gopigo_control()
     
     while True:
@@ -114,24 +102,19 @@ if __name__ == "__main__":
         shoot_pos = vs.aheadPos(vs.markers[13],200)
         gopigo_to_target_angle = vs.calcAngle(vs.markers[1],shoot_pos)
 
-        draw_string_curses(stdscr,"gpg_mode:"+stat.gpg_mode,1)
-        draw_string_curses(stdscr,"turn_degree:"+str(gpgc.calc_gopigo_degree(stat.gpg_turn_degree)),3)
         draw_string_curses(stdscr,"to_angle:"+str(gopigo_to_target_angle),4)
         
+        # if marker info is not updated in 1 second, gopigo will stop.
         if (datetime.datetime.now() - vs.updated).total_seconds()*1000 > 1000:
-            # if marker info is not updated in 1 second, gopigo will stop.
-            stat.gpg_mode = "timeout"
+            pass
         elif abs(gopigo_to_target_angle) > 10:
-            stat.gpg_mode = "turn"
-            stat.gpg_turn_degree = gopigo_to_target_angle
+            gpgc.pi.turn_degrees(gpgc.calc_gopigo_degree(gopigo_to_target_angle),blocking=False)
         else:
-            stat.gpg_mode = "stop"
+            gpgc.pi.stop()
 
-        gpgc.move(stat)
         w = stdscr.getch() #non blocking, getch() returns int value
         if w==ord('q'):
             print("end")
-            stat.vs_mode="quit"
             break
 
     #Clean up curses.
