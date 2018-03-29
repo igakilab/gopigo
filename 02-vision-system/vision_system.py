@@ -66,3 +66,10 @@ class vision_system:
         diff = obj1_pos - obj2_pos
         distance_px = numpy.sqrt(diff[0]**2 + diff[1]**2)
         return distance_px
+
+    # Gopigo(obj1) and obj2 face each other if gopigo rotates based on the result of this method(degree).
+    def calc_face_angle(self,obj1,obj2):
+        opposite_orientation_of_obj2 = numpy.rad2deg(math.atan2(obj2[3]*-1,obj2[2]*-1))
+        degree_of_obj1 = numpy.rad2deg(math.atan2(obj1[3],obj1[2]))
+        obj1_face_obj2 = opposite_orientation_of_obj2 - degree_of_obj1
+        return obj1_face_obj2
