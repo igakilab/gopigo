@@ -8,6 +8,38 @@ import picamera
 import picamera.array
 import cv2
 
+class cv_control:
+    def __init__(self):
+        # key is an base h value of the color(e.x. 10 means skin color)
+        # value indicates lower(0,1,2) and upper(3,4,5) hsv values
+        self.lower = []
+        self.upper = []
+    
+    def set_filter(self,base_hvalue):
+        self.lower = numpy.array([base_hvalue-10, 100, 100], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+10, 255, 255], dtype = "uint8")
+    
+    def extract_contours(self,frame):
+        image = numpy.copy(frame)
+        # Convert BGR to HSV
+        hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        hueMat = cv2.inRange(hsv, self.lower, self.upper)
+        kernel = numpy.ones((4,4),numpy.uint8)
+
+        hueMat = cv2.erode(hueMat,kernel,iterations = 3)
+        hueMat = cv2.dilate(hueMat,kernel,iterations = 6)
+        hueMat = cv2.erode(hueMat,kernel,iterations = 3)
+
+        # Bitwise-AND mask for original image and hueMat
+        res = cv2.bitwise_and(image,image, mask= hueMat)
+
+        #find contours
+        contours, _ = cv2.findContours(hueMat, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+        cv2.drawContours(image, contours, -1, (0,255,0), 3)#draw all contours in green
+        cv2.imshow("get contours",image)
+        return contours
+    
+
 class gopigo_control:
     def __init__(self):
         self.pi = easygopigo3.EasyGoPiGo3()
@@ -73,6 +105,8 @@ if __name__ == "__main__":
     vs = vs.vision_system("150.89.234.226",7777)
     gpgc = gopigo_control()
     stat = status()
+    cvc = cv_control()
+    cvc.set_filter(10)
     
     while True:
         vs.read_vs_socket()
@@ -97,6 +131,7 @@ if __name__ == "__main__":
         
         frame = gpgc.capture_frame()
         cv2.imshow("Captured Image",frame)
+        contours = cvc.extract_contours(frame)
         cv2.waitKey(1) #imshow requires waitKey()
         
         # if marker info is not updated in 1 second, gopigo will do nothing.
