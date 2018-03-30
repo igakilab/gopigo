@@ -7,18 +7,16 @@ import numpy
 
 class cv_control:
     def __init__(self):
-        self.color_hbase = 110 # blue
         self.lower = []
         self.upper = []
     
     # set lower and upper filter. 
-    def update_filter(self,hbase):
-        self.lower = numpy.array([self.color_hbase-10, 100, 100], dtype = "uint8")
-        self.upper = numpy.array([self.color_hbase+10, 255, 255], dtype = "uint8")
+    def set_filter(self,base_hvalue):
+        self.lower = numpy.array([base_hvalue-10, 100, 100], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+10, 255, 255], dtype = "uint8")
     
     # returns contours array
     def extract_contours(self,frame):
-        self.update_filter(self.color_hbase)
         image = numpy.copy(frame)
         # Convert BGR to HSV
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -101,6 +99,7 @@ class gopigo_status:
 if __name__ == '__main__':
     gpgc = gopigo_control()
     cvc = cv_control()
+    cvc.set_filter(110)
     status = gopigo_status()
 
     while True:
