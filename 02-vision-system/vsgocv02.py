@@ -106,7 +106,7 @@ if __name__ == "__main__":
     gpgc = gopigo_control()
     stat = status()
     cvc = cv_control()
-    cvc.set_filter(10)
+    cvc.set_filter(170) # set lower and upper filter. base_hvalue "170" indicates "red".
     
     while True:
         vs.read_vs_socket()
