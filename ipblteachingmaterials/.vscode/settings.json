@@ -1,0 +1,13 @@
+{
+    "files.encoding": "utf8",
+    "editor.renderWhitespace": "boundary",
+    "workbench.colorTheme": "Default Light+",
+    "files.exclude": {
+        "bin/": true
+    },
+    "workbench.editor.enablePreview": false,
+      // Git が有効になっているかどうか
+    "git.ignoreMissingGitWarning": true,
+    "git.enabled": false,
+    "terminal.integrated.shell.windows": "C://oit/PortableGit2.15.1.2-64/bin/bash.exe"
+}
