@@ -7,7 +7,7 @@
 
 ## eclipse setting
 - Launch eclipse
-  - Execute ``C:\byod\eclipse\eclipse.exe``
+  - Execute ``C:\eclipse\eclipse.exe``
 - Import Project
   - In [Import] Window, select [General->Projects from Folder or Archive] and click [Next] Button.
   - In [Import Projects from File System or Archive] window, select ``vision system.zip``, unckeck ``[vision system.zip_expanded]``, and click [Finish] as follows.
@@ -15,8 +15,6 @@
 <a href="https://sites.google.com/site/ipbloit/private/2018/02/eclipse_import.jpg"><img src="/site/ipbloit/private/2018/02/eclipse_import.jpg" border="0" width="800"></a>
 
   - It's OK, if ``vision system`` is added in the package explorer.
-- Install DLL
-  - Copy ``lib\djs.dll`` into ``C:\byod\java1.8_152\bin`` directory
 - Configure vm parameters
   - Right click `src\DetectMarkerServer.java`->[Run As]->[Run Configurations].
   - In [Run Configurations] window, select [Arguments] Tab, and input `-Xss64m -Xms64m -Xmx64m` in the [VM arguments] as follows.
@@ -25,7 +23,7 @@
 
 ## Launch vision system
 - In the [Run Configurations], click [Run] button, or Right click `src\DetectMarkerServer.java`->[Run As]->[Java Application].
-- It's OK, if vs-marker is adequately detected as follows.
+- It's OK, if vs-marker is adequately detected.
 
 ## Trouble Shooting
 ### Camera does not work
