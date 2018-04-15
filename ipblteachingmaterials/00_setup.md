@@ -23,34 +23,37 @@
 
 ## Gopigo Setup
 - Assemble GoPiGo
-  - [Reference](https://www.dexterindustries.com/GoPiGo/get-started-with-the-gopigo3-raspberry-pi-robot/1-assemble-gopigo3/)
+  - [Assemble Gopigo manual](https://www.dexterindustries.com/GoPiGo/get-started-with-the-gopigo3-raspberry-pi-robot/1-assemble-gopigo3/)
+- Connect PiCamera
+  - [Attach Picamera manual](https://www.dexterindustries.com/GoPiGo/get-started-with-the-gopigo3-raspberry-pi-robot/4-attach-the-camera-and-distance-sensor-to-the-raspberry-pi-robot/)
 - Setup battery case and connect power plug to gopigo.
 - Connect USB power adapter
   - you can use gopigo without usb power adapter.
 - Power ON
   - Connecting USB power adapter or pushing the button over the micro-USB connector turns on the gopigo.
-<a href="https://sites.google.com/site/ipbloit/private/2018/-00/gopigoconnect.jpg"><img src="/site/ipbloit/private/2018/-00/gopigoconnect.jpg" border="0" width="320" height="230"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/-00/gopigoconnect.jpg"><img src="/site/ipbloit/2018/-00/gopigoconnect.jpg" border="0" width="320" height="230"></a>
 - Connect PC and gopigo (in the front) with LAN cable
 - Access Raspbian for Robots with Internet Explorer
   - Start Internet Explorer, and access http://192.168.0.2/
-<a href="https://sites.google.com/site/ipbloit/private/2018/-00/novncenter.jpg"><img src="/site/ipbloit/private/2018/-00/novncenter.jpg" border="0" width="320"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/-00/novncenter.jpg"><img src="/site/ipbloit/2018/-00/novncenter.jpg" border="0" width="320"></a>
   - Click VNC icon(Launch VNC)
   - input Password [robots1234]
   - You can access Raspbian OS view.
-<a href="https://sites.google.com/site/ipbloit/private/2018/-00/raspbian1.jpg"><img src="/site/ipbloit/private/2018/-00/raspbian1.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/-00/raspbian1.jpg"><img src="/site/ipbloit/2018/-00/raspbian1.jpg" border="0" width="600"></a>
 - You can access Raspbian for Robots with UltraVNC.exe
   - Start UltraVNC Viewer
   - Input[``192.168.0.2:0``] and Connect.
-<a href="https://sites.google.com/site/ipbloit/private/2018/-00/ultravnc.jpg"><img src="/site/ipbloit/private/2018/-00/ultravnc.jpg" border="0" width="320"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/-00/ultravnc.jpg"><img src="/site/ipbloit/2018/-00/ultravnc.jpg" border="0" width="320"></a>
   - UltraVNC enables users to copy and paste text between windows pc and the raspbian.
   - I recommend to use wired connection(192.168.0.2) during development with UltraVNC.
+- Execute DI Software updates
 - Setup wireless network
   - Click Wifi Setup in the raspbian.
   - Click Scan button and select indicated SSID.
   - Confirm SSID and input password.
   - Add
   - Connect in the Current Status.
-<a href="https://sites.google.com/site/ipbloit/private/2018/-00/wifisetting.jpg"><img src="/site/ipbloit/private/2018/-00/wifisetting.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/-00/wifisetting.jpg"><img src="/site/ipbloit/2018/-00/wifisetting.jpg" border="0" width="600"></a>
   - You can also access Raspbian with wifi IP address
 - Power OFF
   - Click Shutdown icon, and disconnect micro USB cable.
@@ -59,7 +62,7 @@
 ## Software in Raspbian
 ### Command line terminal
 - Click command line terminal icon in raspbian
-<a href="https://sites.google.com/site/ipbloit/private/2018/-00/commandline.jpg"><img src="/site/ipbloit/private/2018/-00/commandline.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/-00/commandline.jpg"><img src="/site/ipbloit/2018/-00/commandline.jpg" border="0" width="600"></a>
 - You can copy and paste all commands in this education materials.
   - Right click copy and paste also can be available.
   - You cannot copy and paste between windows and raspbian through noVNC.
@@ -74,7 +77,7 @@ $ geany [filename] &
 ```
 
 - You can run python program on terminal or geany. You can run python program for just pushing ``F5`` on geany.
-<a href="https://sites.google.com/site/ipbloit/private/2018/-00/geany.jpg"><img src="/site/ipbloit/private/2018/-00/geany.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/-00/geany.jpg"><img src="/site/ipbloit/2018/-00/geany.jpg" border="0" width="600"></a>
 
 ### Image Viewer
 - You can view images with using gpicview.
@@ -83,7 +86,7 @@ $ geany [filename] &
 $ gpicview [imagefilename]
 ```
 
-<a href="https://sites.google.com/site/ipbloit/private/2018/-00/gpicview.jpg"><img src="/site/ipbloit/private/2018/-00/gpicview.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/-00/gpicview.jpg"><img src="/site/ipbloit/2018/-00/gpicview.jpg" border="0" width="600"></a>
 
 # Try GoPiGo
 - We can use python API library for GoPiGo control.In the following, let's study how to use such APIs and basic python programming.

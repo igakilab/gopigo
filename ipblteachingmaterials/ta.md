@@ -20,43 +20,51 @@
 
 # 器材管理
 - Gopigo+PiCamera+金具
-  - HRC:
+  - HRC:12
 - 単3充電池
   - HRC:
 - 充電器
-  - HRC:
+  - HRC:12
 - エネロイド充電器
-  - HRC:
+  - HRC:4(予定)
 - 無線LANルータ＋ACアダプタ
   - HRC:1
 - マルチタップ
-  - 井垣研：4つ口を6つ程度
+  - 知能センターのものを利用する
 - カッターマット
   - 鎌倉研:A2 1枚
 - カッターナイフ
+  - IS科事務:1
   - 井垣研:1
   - HRC:1
 - はさみ
   - 井垣研:1
-- 金属定規
   - HRC:1
+- 定規
+  - 金属定規 HRC:1
+  - アクリル定規 IS科 :2
 - ノートPC
   - HRC:9
   - 鎌倉研:5
 - オートポール
-  - HRC:
-  - 西口研:
+  - HRC:8+2追加予定
+  - 西口研:?
 - オートポールクランプ
-  - HRC:
-  - 西口研:
+  - 西口研:12
 - USB-Webカメラ(Logicool 920C)
-  - 鎌倉研:10台
+  - 鎌倉研:10
 - USB-Webカメラ固定具（アングルと固定するやつ）
+  - HRC:10予定
 - USB-Webカメラ延長ケーブル(5m)
-- アングル*5
+  - HRC:10予定
+- アングル
+  - HRC:5予定
 - 付箋（井垣研からそれなりの量）
 - テプラ：IS科事務室
-
+- USBメモリ
+  - IS基礎:2
+- SDカードリーダー
+  - HRC:2
 
 # SA実施タスク
 ## 概要
@@ -65,23 +73,33 @@
 - gopigo開発のための環境設定．SDカードのコピーやWindows PCの各種セットアップ等．
 - ゲームフィールド作成．PBL本番では，ロボットによる対戦ゲームが行われます．そこで必要となるいくつかの小物等を開発して貰う予定です．
 - 学生対応．質問対応や進捗管理（進捗管理は事前学習時のみでOK）等のフォローをしてあげてください．
+  - 特に自習時等で1人で取り組もうとしている参加学生がいた場合は，できる限りサポートについてあげてください．
 
 ## 主/副リーダーのタスク
 - 鍵の開閉．事前学習土曜日の鍵の開閉は教員がやりますが，水曜日（自習日）のリーダーの人は1F防災センターに行って，知能情報システム研究センター（旧ITセミナー室）の鍵（部屋後方扉）を借りて13:30~17:00までいるようにしてください．
 - 以下のシートを開き，参加学生，TAの出欠（o,連絡なしx,連絡ありx）を書いておいてください．
   - https://docs.google.com/spreadsheets/d/1E-czYvc6KT6kiTASxVSMuYIYfNHYy3kQCB5nJWzyoCc/edit#gid=0
 
+## テプラ **(4/14)**
+- gopigo, ノートPC等の小物にどこの研究室から来たものかを示すテプラシールを作成し，貼り付ける
+
 ## gopigo SDカードセットアップ **(4/14)**
 - USBメモリに入っているEtcher-Setup-....exeファイルをTA用PC（あるいは空きPC）にインストールし，下記URLに従って，同じくUSBメモリに入っている`180331_Raspbian_custom.img`というOSイメージをgopigoに付随するSDカードにコピーしていく
-- https://www.dexterindustries.com/howto/install-raspbian-for-robots-image-on-an-sd-card/
+  - https://www.dexterindustries.com/howto/install-raspbian-for-robots-image-on-an-sd-card/
+- 自分のPCにアプリがインストールされるのが嫌な場合は↓のツールでもイメージをコピーできる
+  - WinDD http://www.si-linux.co.jp/techinfo/index.php?DD%20for%20Windows
+  - こちらはレジストリをいじらないので，イメージのコピーが終わったらフォルダごと消せばOK．
 
 ## 学生WindowsPCセットアップ **(4/14)**
-- ログインID：pbl18/passなし？
-  - 他に管理者権限アカウントが必要かも
+- ログインID：admin/passなし(HRCノートPC)，Satlab/satlab(鎌倉研ノートPC)
+  - 各種インストールに管理者権限が必要
+  - 両方とも授業開始前にpbl18アカウントに統一するかも
 - 必要であればWindows Updateを行う．
 - 有線LANのネットワーク設定を行う．**(4/14)**
   - IPv4:192.168.0.10, ネットマスク:255.255.255.0
   - 参考：http://faq.buffalo.jp/app/answers/detail/a_id/15775
+- 無線LANの接続設定を行う **(4/14)**
+  - HRC無線LANルータの設定を確認する
 - eclipse, UltraVNC, RLogin, MS Officeを学生が利用するWindows PCにセットアップする
   - 各インストーラをコピーしたUSBメモリを渡すので，学生PCにコピーしていくこと
   - 4/14時点では利用されているノートPCについてはファイルのコピーとUltraVNCのセットアップのみ行う．残りのソフトについては水曜日に空いているPCから順に実施していくこと．
@@ -96,7 +114,7 @@
   - sakura_install....exe インストール
   - Office2016インストール
     - Word/Excel/Powerpoint
-    - ライセンス認証
+    - ライセンス認証(PDF参照)
 - Windowsの表示を英語にする
   - https://support.microsoft.com/ja-jp/help/4027670/windows-add-and-switch-input-and-display-language-preferences-in-windo
 - Officeの表示を英語にする
