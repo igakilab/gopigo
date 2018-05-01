@@ -134,14 +134,19 @@
 - @Hiroto KAJIHARA @Misaka Kento @shotaro_ishigami @masaya_suetomi の4名は4/14の早い段階でLANケーブルを作成(長さ5m*10本)をお願いします(各種機材は奥野先生手配)
 
 ### vs-marker作成(40枚)
-- vs-marker(vision systemで撮影し，vs-markerが貼られたロボット等の位置情報を特定するためのマーカー)をA4に印刷した紙を持っていくので，それをハサミやカッターで切り離し，両面テープで白プラダンに貼り付ける
+- vs-marker(vision systemで撮影し，vs-markerが貼られたロボット等の位置情報を特定するためのマーカー)をA4に印刷した紙を持っていくので，それをハサミやカッターで切り離し，両面テープで同じサイズの白プラダンに貼り付ける
   - 貼り付ける前にvs-markerと同じサイズ(12cm*12cm)になるように白プラダンを切っておくこと
 - gopigoにvs-markerをマジックテープで貼り付けられるようにする
 
 ### Target作成(15セット)
 - gopigoがカメラで撮影するターゲット
-- 40 * 45の白プラダン
-- 10 * 15の緑 or 青 or 黃プラダン
+- 40 * 30の白プラダンを15枚作成
+  - 下図のように15cm,10cm,15cmになるように折れ目を入れ，上面，奥/手前面の空いた直方体になるように折り曲げる
+
+<a href="https://sites.google.com/site/ipbloit/private/2018/ta/target.jpg"><img src="/site/ipbloit/private/2018/ta/target.jpg" border="0" width="200"></a>
+
+- 10 * 15の緑 or 青 or 黃プラダンをそれぞれ5枚ずつ作成
+  - 上図で作成した直方体の奥の面にこれらのプラダンを養生テープ（白）で固定する
 - 床から20cm程度のところに置けるよう発泡スチロールの台を固定する
 
 ### Guard作成(10枚)

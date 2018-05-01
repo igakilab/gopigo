@@ -61,7 +61,7 @@ $ python opencv01.py
 
 -----
 ## Camera capture (opencv02.py)
-<a href="https://sites.google.com/site/ipbloit/private/2018/01/opencv02.jpg"><img src="/site/ipbloit/private/2018/01/opencv02.jpg" border="0" width="500"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/01/opencv02.jpg"><img src="/site/ipbloit/2018/01/opencv02.jpg" border="0" width="500"></a>
 - Reference: [PiCamera API](http://picamera.readthedocs.io/en/release-1.12/recipes1.html#capturing-consistent-images)
 - Type (or copy and paste) the following code and save it as ``opencv02.py``.
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
 -----
 ## Detect skin color region (opencv03.py)
-<a href="https://sites.google.com/site/ipbloit/private/2018/01/opencv03.jpg"><img src="/site/ipbloit/private/2018/01/opencv03.jpg" border="0" width="500"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/01/opencv03.jpg"><img src="/site/ipbloit/2018/01/opencv03.jpg" border="0" width="500"></a>
 - Copy ``opencv02.py`` as ``opencv03.py``.
 - Add ``import numpy``
 - Add ``cv_control`` class.
@@ -166,14 +166,13 @@ if __name__ == '__main__':
 
 -----
 ## Detect contours of skin color region (opencv04.py)
-<a href="https://sites.google.com/site/ipbloit/private/2018/01/opencv04.jpg"><img src="/site/ipbloit/private/2018/01/opencv04.jpg" border="0" width="500"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/01/opencv04.jpg"><img src="/site/ipbloit/2018/01/opencv04.jpg" border="0" width="500"></a>
 - Copy ``opencv03.py`` as ``opencv04.py``.
 - Replace ``detect_color(self,frame)`` method in the ``cv_control`` class
 
 ```python
     # detect_color(self,frame) detects color regions between self.lower and self.upper.        
     def detect_color(self,frame):
-        self.update_filter(self.color_hbase)
         image = numpy.copy(frame)
         # Convert BGR to HSV
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -201,7 +200,7 @@ if __name__ == '__main__':
 
 -----
 ## Detect the area and center position for each contour (opencv05.py)
-<a href="https://sites.google.com/site/ipbloit/private/2018/01/opencv05.jpg"><img src="/site/ipbloit/private/2018/01/opencv05.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/01/opencv05.jpg"><img src="/site/ipbloit/2018/01/opencv05.jpg" border="0" width="800"></a>
 - Copy ``opencv04.py`` as ``opencv05.py``.
 - Delete ``detect_color`` method from ``cv_control`` class.
 - Add ``extract_contours`` method and ``detect_contour_position`` method into the ``cv_control`` class.
@@ -209,7 +208,6 @@ if __name__ == '__main__':
 ```python
     # returns contours array
     def extract_contours(self,frame):
-        self.update_filter(self.color_hbase)
         image = numpy.copy(frame)
         # Convert BGR to HSV
         hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
@@ -345,7 +343,7 @@ if __name__ == '__main__':
 
 # Image Processing on GoPiGo
 ## Capture the blue object (go_cv01.py)
-<a href="https://sites.google.com/site/ipbloit/private/2018/01/go_cv01.jpg"><img src="/site/ipbloit/private/2018/01/go_cv01.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/01/go_cv01.jpg"><img src="/site/ipbloit/2018/01/go_cv01.jpg" border="0" width="800"></a>
 - Copy ``opencv05.py`` as ``go_cv01.py`` 
 - Store the five images(``blue1.jpg``~``blue5.jpg``) which include the largest (>= 10000 px) blue object. 
 - Add the following ``gopigo_status`` class.
@@ -493,7 +491,7 @@ if __name__ == '__main__':
 
 - Execute ``go_cv02.py``
 - Gopigo turns toward the largest blue object (cx always exists between 200px ~ 440px), continuouslly.
-― If there is no blue object in the captured frame, gopigo stops.
+- If there is no blue object in the captured frame, gopigo stops.
 
 ## [***Exercise***] Go to the green (go_cv03.py)
 - Gopigo turns toward the largest **green** object(cx always exists between 200px ~ 440px), continuouslly.

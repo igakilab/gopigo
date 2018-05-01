@@ -3,7 +3,7 @@
 - Connect USB camera to PC.
 - Change the setting about auto focus of the USB camera as the following image.
 
-<a href="https://sites.google.com/site/ipbloit/private/2018/02/logicool.jpg"><img src="/site/ipbloit/private/2018/02/logicool.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/logicool.jpg"><img src="/site/ipbloit/2018/02/logicool.jpg" border="0" width="800"></a>
 
 ## eclipse setting
 - Launch eclipse
@@ -12,14 +12,14 @@
   - In [Import] Window, select [General->Projects from Folder or Archive] and click [Next] Button.
   - In [Import Projects from File System or Archive] window, select ``vision system.zip``, unckeck ``[vision system.zip_expanded]``, and click [Finish] as follows.
 
-<a href="https://sites.google.com/site/ipbloit/private/2018/02/eclipse_import.jpg"><img src="/site/ipbloit/private/2018/02/eclipse_import.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/eclipse_import.jpg"><img src="/site/ipbloit/2018/02/eclipse_import.jpg" border="0" width="800"></a>
 
   - It's OK, if ``vision system`` is added in the package explorer.
 - Configure vm parameters
   - Right click `src\DetectMarkerServer.java`->[Run As]->[Run Configurations].
   - In [Run Configurations] window, select [Arguments] Tab, and input `-Xss64m -Xms64m -Xmx64m` in the [VM arguments] as follows.
 
-<a href="https://sites.google.com/site/ipbloit/private/2018/02/eclipse_run_configurations.jpg"><img src="/site/ipbloit/private/2018/02/eclipse_run_configurations.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/eclipse_run_configurations.jpg"><img src="/site/ipbloit/2018/02/eclipse_run_configurations.jpg" border="0" width="800"></a>
 
 ## Launch vision system
 - In the [Run Configurations], click [Run] button, or Right click `src\DetectMarkerServer.java`->[Run As]->[Java Application].
@@ -74,10 +74,10 @@ except KeyboardInterrupt:
 ```
 
 - Execute ``socket_client01.py``.
-<a href="https://sites.google.com/site/ipbloit/private/2018/02/vs01.jpg"><img src="/site/ipbloit/private/2018/02/vs01.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/vs01.jpg"><img src="/site/ipbloit/2018/02/vs01.jpg" border="0" width="800"></a>
 - You can see the information of detected vs-marker on the command line terminal in the raspbian.
   - e.x. ``response = 0 93.5 223.0 0.09053574604251853 -0.9958932064677039
-  -the previous information means marker.getID() + " " + location.getX() + " " + location.getY() + " " + orientationY.getX() + " " + orientationY.getY()
+  -the previous information means marker.getID() + " " + location.getX() + " " + location.getY() + " " + orientationX.getX() + " " + orientationY.getY()
   - As shown in the previous figure, information about vsmarker id, location and orientation for each marker is presented by the vision system.
 - In order to stop the client, Push ``Ctr+C`` on the terminal.
 
@@ -174,7 +174,7 @@ def draw_string_curses(screen,msg,pos):
 
 
 # Vision system and gopigo
-## Calculate the angle at which obj1(gopigo) heads towards obj2(target) (check_angle01.py)
+## Calculate the angle for obj1(gopigo) to turn toward obj2(target) (check_angle01.py)
 - Type (or copy and paste) the following code and save it as ``check_angle01.py``.
 
 ```python
@@ -202,7 +202,7 @@ print("obj1_to_obj2:" + str(obj1_to_obj2))
 - Execute ``check_angle01.py``
 - This program calculates angle (degree) from obj1 to obj2 as shown in the following figure.
 
-<a href="https://sites.google.com/site/ipbloit/private/2018/02/vs02.jpg"><img src="/site/ipbloit/private/2018/02/vs02.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/vs02.jpg"><img src="/site/ipbloit/2018/02/vs02.jpg" border="0" width="800"></a>
 
 ## Gopigo turns to the target(vsgo01.py)
 - Type (or copy and paste) the following code and save it as ``vsgo01.py``.
@@ -433,7 +433,7 @@ print("distance_between_obj1_and_obj2:" + str(distance_between_obj1_and_obj2))
 - Execute ``calc_distance.py``
 - This program calculates distance between obj1 and obj2.
 
-<a href="https://sites.google.com/site/ipbloit/private/2018/02/vs03.jpg"><img src="/site/ipbloit/private/2018/02/vs03.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/vs03.jpg"><img src="/site/ipbloit/2018/02/vs03.jpg" border="0" width="800"></a>
 
 -----
 ## Convert px value into gopigo's drive degree(convert_px_degree.py)
@@ -441,7 +441,7 @@ print("distance_between_obj1_and_obj2:" + str(distance_between_obj1_and_obj2))
   - http://gopigo3.readthedocs.io/en/latest/api-basic.html#easygopigo3.EasyGoPiGo3.drive_degrees
 - Vision system offers only px value for each marker from 640 * 480 images captured by web camera.
 - In order to combine vision system and gopigo, you must convert px value into gopigo's drive degree value.
-- Type (or copy and paste) the following code and save it as ``calc_distance.py``.
+- Type (or copy and paste) the following code and save it as ``convert_px_degree.py``.
 
 ```python
 import socket
@@ -460,7 +460,7 @@ class gopigo_control:
 
 if __name__ == "__main__":
 
-    vs = vs.vision_system("150.89.234.226",7777)
+    vs = vs.vision_system("???.???.???.???",7777)
     gpgc = gopigo_control()
 
     gpgc.pi.reset_encoders()
@@ -502,7 +502,7 @@ if __name__ == "__main__":
 ```
 
 
-## Gopigo turns and approaches to the target(vsgo03.py)
+## Gopigo approaches to the target(vsgo03.py)
 - Use status class.
 - Add the following code into the ``vision_system`` class in the ``vision_system.py``
 
@@ -608,7 +608,7 @@ if __name__ == "__main__":
 - In this program, first, gopigo turns and approaches to the target. Next, gopigo returns to the start place, and glows the LEDs blue.
 
 -----
-## Calculate angle at which obj1(gopigo) and obj2(target) face each other (check_angle02.py)
+## Calculate the angle for obj1(gopigo) to face the front of the obj2(target) (check_angle02.py)
 
 - Type (or copy and paste) the following code and save it as check_angle02.py.
 
@@ -636,12 +636,12 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 ```
 
 - Execute ``check_angle02.py``
-- This program calculates angle at which obj1(gopigo) and obj2(target) face each other as shown in the following figure.
+- This program calculates angle for obj1(gopigo) to face the front of the obj2(target) as shown in the following figure.
 
-<a href="https://sites.google.com/site/ipbloit/private/2018/02/vs04.jpg"><img src="/site/ipbloit/private/2018/02/vs04.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/vs04.jpg"><img src="/site/ipbloit/2018/02/vs04.jpg" border="0" width="800"></a>
 
 -----
-## Gopigo will rotate, approach and face the front of the target(vsgo05.py)
+## Gopigo approaches and faces the front of the target(vsgo05.py)
 - Add the following code into the ``vision_system`` class in the ``vision_system.py``
 
 ```python
@@ -741,7 +741,7 @@ import cv2
 - When Gopigo faces the target, it shoots the target and saves the image named ``capture.jpg``.
 
 ## Gopigo shows contours of the target(vsgocv02.py)
-<a href="https://sites.google.com/site/ipbloit/private/2018/02/contours.jpg"><img src="/site/ipbloit/private/2018/02/contours.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/contours.jpg"><img src="/site/ipbloit/2018/02/contours.jpg" border="0" width="800"></a>
 
 - Copy ``vsgocv01.py`` as ``vsgocv02.py``
 - Add the following ``cv_control`` class in the ``vsgocv02.py``.
