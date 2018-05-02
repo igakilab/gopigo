@@ -12,6 +12,7 @@
 - Connect between gopigo and note PC with WiFi.
   - Check IP address of each gopigo for wifi connection.
   - Access with Internet explorer or UltraVNC.
+- **[Teaching Point!]** OIT students explain the differences between LAN and wifi, anb between Internet explorer and UltraVNC.
 
 # Gopigo control
 ## Key control (gopigo_key01.py)
@@ -21,7 +22,7 @@
   - ``q`` means ``break`` the loop.
 - [Curses](https://docs.python.org/3.6/howto/curses.html#curses-programming-with-python) library supplies keyboard-handling facility for text-based terminals.
 - Type (or copy and paste) the following code and save it as ``key_control01.py``.
-- **[Teaching Point!]** OIT students explain the detail of the following source code.
+- **[Teaching Point!]** OIT students explain the detail of the following source code, how to use the editor `geany`, and how to execute `*.py`.
 
 ```python
 import easygopigo3
