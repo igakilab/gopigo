@@ -40,10 +40,50 @@ Self-introduction of participants
   - [Vision System](/site/ipbloit/2018/02)
 - [Self-Study Day] 2018/6/13(Wed) 13:30~17:00@161 IIS room
   - [Vision System](/site/ipbloit/2018/02)
-- 2017/06/18(Mon) to 2017/06/23(Sat)
-  - International PBL work at OIT
 
-- See also...
+## Schedule of PBL week at IIS room(2018/06/18(Mon) to 2018/06/23(Sat))
+### 6/18(Mon)
+- 10:00 - 12:00
+  - Opening ceremony
+- 13:00 - 17:00
+  - [Mini exercise](https://sites.google.com/site/ipbloit/2018/03)
+    - OIT students teach how to develop gopigo robots for final shooting competition.
+- 17:30 - 19:30
+  - Welcome Party(2F Restaurant)
+
+### 6/19(Tue)
+- 9:30 - 12:00
+  - Mini game
+- 13:00 - 16:00
+  - Develop gopigo robots
+
+### 6/20(Wed)
+- 9:30 - 16:00
+  - Develop gopigo robots
+
+### 6/21(Thu)
+- Excursion tour at Grand front Osaka and OIT Umeda campus
+
+### 6/22(Fri)
+- 9:30 - 12:00
+  - Develop gopigo robots
+- 13:00 - 16:00
+  - Prepare power point presentation for team introduction
+  - Prepare oral presentation about this ipbl
+
+### 6/23(Sat)
+- 9:30 - 10:00
+  - Prepare for final competition
+- 10:15 - 11:30
+  - Final competition 1st stage
+- 12:30 - 13:45
+  - Final competition 2nd stage
+- 14:00 - 15:00
+  - Team/Personal presentation
+- 15:00 - 16:00
+  - Closing
+
+### See also...
   - http://www.siit.tu.ac.th/index.php
   - http://www.oit.ac.jp/english/education/ist/
   - http://www.thaiairways.com/

@@ -5,7 +5,8 @@
 
 <a href="https://sites.google.com/site/ipbloit/2018/02/logicool.jpg"><img src="/site/ipbloit/2018/02/logicool.jpg" border="0" width="800"></a>
 
-## eclipse setting
+## eclipse project setting
+- Download [vision system.zip](https://sites.google.com/site/ipbloit/2018/02/vision%20system.zip).
 - Launch eclipse
   - Execute ``C:\eclipse\eclipse.exe``
 - Import Project
@@ -14,7 +15,7 @@
 
 <a href="https://sites.google.com/site/ipbloit/2018/02/eclipse_import.jpg"><img src="/site/ipbloit/2018/02/eclipse_import.jpg" border="0" width="800"></a>
 
-  - It's OK, if ``vision system`` is added in the package explorer.
+  - It's OK, if ``vision system`` is added in the package explorer of eclipse.
 - Configure vm parameters
   - Right click `src\DetectMarkerServer.java`->[Run As]->[Run Configurations].
   - In [Run Configurations] window, select [Arguments] Tab, and input `-Xss64m -Xms64m -Xmx64m` in the [VM arguments] as follows.
@@ -660,7 +661,7 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 ```python
         elif abs(gopigo_face_target_angle) > 10:
             stat.gpg_mode = "turn"
-            stat.gpg_turn_degree = gopigo_face_target_angle
+            stat.gpg_turn_degree = gpgc.calc_gopigo_degree(gopigo_face_target_angle)
 ```
 
 - Execute ``vsgo05.py``.

@@ -14,14 +14,51 @@
   - Access with Internet explorer or UltraVNC.
 - **[Teaching Point!]** OIT students explain the differences between LAN and wifi, anb between Internet explorer and UltraVNC.
 
+## Preparation in the raspbian
+### Command line terminal
+- Click command line terminal icon in raspbian
+<a href="https://sites.google.com/site/ipbloit/2018/-00/commandline.jpg"><img src="https://sites.google.com/site/ipbloit/2018/-00/commandline.jpg" border="0" width="600"></a>
+- You can copy and paste all commands in this education materials.
+  - Right click copy and paste also can be available.
+  - You cannot copy and paste between windows and raspbian through Internet explorer.
+  - If you want to C&P any commands or source code, you should use UltraVNC.
+
+### Text Editor and IDE
+- You can use a geany editor in the raspbian.
+- You can launch geany and open file by the following command in the raspbian.
+
+```
+$ geany [filename] &
+```
+
+- You can run python program on terminal or geany. You can run python program for just pushing ``F5`` on geany.
+<a href="https://sites.google.com/site/ipbloit/2018/-00/geany.jpg"><img src="https://sites.google.com/site/ipbloit/2018/-00/geany.jpg" border="0" width="600"></a>
+
+### Image Viewer
+- You can view images with using gpicview.
+
+```
+$ gpicview [imagefilename]
+```
+
+<a href="https://sites.google.com/site/ipbloit/2018/-00/gpicview.jpg"><img src="https://sites.google.com/site/ipbloit/2018/-00/gpicview.jpg" border="0" width="600"></a>
+
+
 # Gopigo control
+- First, create pbl directory in the `$HOME`.
+
+```
+$ mkdir ipblmain
+$ cd ipblmain
+```
+
 ## Key control (gopigo_key01.py)
 - Control Gopigo with Key Input using curses library.
   - ``w`` means forward, and ``x`` means stop.
   - ``d`` means right and ``a`` means left.
   - ``q`` means ``break`` the loop.
 - [Curses](https://docs.python.org/3.6/howto/curses.html#curses-programming-with-python) library supplies keyboard-handling facility for text-based terminals.
-- Type (or copy and paste) the following code and save it as ``key_control01.py``.
+- Type (or copy and paste) the following code and save it as ``gopigo_key01.py``.
 - **[Teaching Point!]** OIT students explain the detail of the following source code, how to use the editor `geany`, and how to execute `*.py`.
 
 ```python
@@ -410,7 +447,7 @@ if __name__ == '__main__':
 
 - You can see the information of detected vs-marker on the command line terminal in the raspbian.
   - e.x. ``0 93.5 223.0 0.09053574604251853 -0.9958932064677039
-  -the previous information means marker.getID() + " " + location.getX() + " " + location.getY() + " " + orientationX.getX() + " " + orientationY.getY()
+  - the previous information means marker.getID() + " " + location.getX() + " " + location.getY() + " " + orientationX.getX() + " " + orientationY.getY()
   - As shown in the previous figure, information about vsmarker id, location and orientation for each marker is presented by the vision system.
 
 - Type (or copy and paste) the following code and save it as ``vsinfo01.py``.
@@ -826,7 +863,7 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 
 - Execute ``angle02.py``
 
-## Gopigo approaches and faces the front of the target(vsgo05.py)
+## Gopigo approaches and faces the front of the target(toward_target03.py)
 - Add the following code into the ``vision_system`` class in the ``vision_system.py``
 - **[Teaching Point!]** OIT students explain the detail of the following source code. 
 
@@ -847,13 +884,13 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 ```python
         elif abs(gopigo_face_target_angle) > 10:
             stat.gpg_mode = "turn"
-            stat.gpg_turn_degree = gopigo_face_target_angle
+            stat.gpg_turn_degree = gpgc.calc_gopigo_degree(gopigo_face_target_angle)
 ```
 
 - Execute ``toward_target03.py``.
 
-## Gopigo approached and detect contours of the target(vsgocv02.py)
-- Type (or copy and paste) the following code and save it as angle02.py.
+## Gopigo approached and detect contours of the target(toward_target04.py)
+- Type (or copy and paste) the following code and save it as toward_target04.py.
 - **[Teaching Point!]** OIT students explain the detail of the following source code. 
 
 
@@ -1009,7 +1046,7 @@ if __name__ == "__main__":
             stat.gpg_drive_degree = dist_between_gopigo_and_target * ?????
         elif abs(gopigo_face_target_angle) > 10:
             stat.gpg_mode = "turn"
-            stat.gpg_turn_degree = gopigo_face_target_angle
+            stat.gpg_turn_degree = gpgc.calc_gopigo_degree(gopigo_face_target_angle)
         elif stat.gpg_mode == "stop":
             pass
         else:
@@ -1029,9 +1066,9 @@ if __name__ == "__main__":
     vs.socket.close()
 ```
 
-
 - You have got every knowledge and technique to develop gopigo robot program.
-- See the rules of Final Competition, and develop robots!
+- Next, check [the minigame and final competition rules](https://sites.google.com/site/ipbloit/2018/04).
+- Develop gopigo robots for mini game until Tuesday Morning!
 - Have fun!
 
 
