@@ -126,8 +126,8 @@ class cv_control:
     
     # set lower and upper filter. 
     def set_filter(self,base_hvalue):
-        self.lower = numpy.array([base_hvalue-10, 100, 100], dtype = "uint8")
-        self.upper = numpy.array([base_hvalue+10, 255, 255], dtype = "uint8")
+        self.lower = numpy.array([base_hvalue-5, 80, 50], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+5, 255, 230], dtype = "uint8")
     
     # detect_color(self,frame) detects color regions between self.lower and self.upper.        
     def detect_color(self,frame):
@@ -331,7 +331,7 @@ if __name__ == '__main__':
 
 - Execute ``color_picker.py``
 - Click the captured video window. BGR and HSV value around the clicked point are shown in command line terminal.
-- Now you should take [H-10, 100,100] and [H+10, 255, 255] as lower bound and upper bound respectively as stated in 'How to find HSV values to track?' of [this document](http://docs.opencv.org/3.2.0/df/d9d/tutorial_py_colorspaces.html).
+- Now you should take [H-5, 80,50] and [H+5, 255, 230] as lower bound and upper bound respectively as stated in 'How to find HSV values to track?' of [this document](http://docs.opencv.org/3.2.0/df/d9d/tutorial_py_colorspaces.html).
 
 -----
 ## [***Exercise***] Detect the center position, width, height, and the area of all blue objects (opencv07.py)

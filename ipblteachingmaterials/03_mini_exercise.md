@@ -164,8 +164,8 @@ class cv_control:
     
     # set lower and upper filter. 
     def set_filter(self,base_hvalue):
-        self.lower = numpy.array([base_hvalue-10, 100, 100], dtype = "uint8")
-        self.upper = numpy.array([base_hvalue+10, 255, 255], dtype = "uint8")
+        self.lower = numpy.array([base_hvalue-5, 80, 50], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+5, 255, 230], dtype = "uint8")
             
     # detect_color(self,frame) detects color regions between self.lower and self.upper.        
     def detect_color(self,frame):
@@ -320,8 +320,8 @@ class cv_control:
     
     # set lower and upper filter. 
     def set_filter(self,base_hvalue):
-        self.lower = numpy.array([base_hvalue-10, 100, 100], dtype = "uint8")
-        self.upper = numpy.array([base_hvalue+10, 255, 255], dtype = "uint8")
+        self.lower = numpy.array([base_hvalue-5, 80, 50], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+5, 255, 230], dtype = "uint8")
     
     # returns contours array
     def extract_contours(self,frame):
@@ -915,8 +915,8 @@ class cv_control:
         self.upper = []
     
     def set_filter(self,base_hvalue):
-        self.lower = numpy.array([base_hvalue-10, 100, 100], dtype = "uint8")
-        self.upper = numpy.array([base_hvalue+10, 255, 255], dtype = "uint8")
+        self.lower = numpy.array([base_hvalue-5, 80, 50], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+5, 255, 230], dtype = "uint8")
     
     def extract_contours(self,frame):
         image = numpy.copy(frame)
