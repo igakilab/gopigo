@@ -141,6 +141,75 @@ while True:
 - In this PBL, you can use these leds freely for decorating gopigo.
 
 # Gopigo and OpenCV
+## Use picamera
+- Type (or copy and paste) the following code and save it as ``gopigo_key04.py``
+- You can control gopigo and pycamera with keyboard.
+- You can use this program for **mini game** (on Tuesday am).
+  - In order to get higher score, you should customize this program with the following multiple opencv functions.
+
+```python
+import easygopigo3
+
+import cv2
+import picamera
+import picamera.array
+import time
+############################################################
+class gopigo_control:
+    # Init various camera parameter.
+    # Finally, every parameter should be fixed to reasonable values.
+    def __init__(self):
+        self.width = 640
+        self.height = 480
+        self.camera = picamera.PiCamera(resolution=(self.width,self.height),framerate=10)
+        self.camera.iso = 100
+        # Wait for the automatic gain control to settle
+        time.sleep(2)
+        # Fix the values
+        self.camera.shutter_speed = self.camera.exposure_speed
+        self.camera.exposure_mode = 'off'
+        g = self.camera.awb_gains
+        self.camera.awb_mode = 'off'
+        self.camera.awb_gains = g
+        print("shutter:"+str(self.camera.shutter_speed)+" awb_gains:"+str(g))
+
+    # capture a frame from picamera
+    def capture_frame(self):
+        cap_stream = picamera.array.PiRGBArray(self.camera,size=(self.width,self.height))
+        self.camera.capture(cap_stream, format='bgr',use_video_port=True)
+        frame = cap_stream.array
+        return frame
+
+###########################################################
+
+gpgc = gopigo_control()
+egpi = easygopigo3.EasyGoPiGo3()
+egpi.set_speed(500)
+
+n = 0
+
+while True:
+    frame = gpgc.capture_frame()
+    cv2.imshow("Camera",frame)
+
+    w = cv2.waitKey(1) % 256
+
+    if w==ord('w'):
+        egpi.forward()
+    elif w==ord('d'):
+        egpi.right()
+    elif w==ord('a'):
+        egpi.left()
+    elif w==ord('s'):
+        egpi.backward()
+    elif w==ord('p'): # Turn off the program
+        egpi.stop()
+        break
+    elif w == ord('1'): # Save sequential images at current directory
+        cv2.imwrite('files{0}.jpg'.format(n),frame)
+        n = n + 1
+```
+
 ## Detect Skin Color with OpenCV(color_detect01.py)
 - Type (or copy and paste) the following code and save it as ``color_detect01.py``.
 - This program detects your skin color, and draw rectangle surrounding detected objects.
@@ -165,7 +234,7 @@ class cv_control:
     # set lower and upper filter. 
     def set_filter(self,base_hvalue):
         self.lower = numpy.array([base_hvalue-5, 80, 50], dtype = "uint8")
-        self.upper = numpy.array([base_hvalue+5, 255, 230], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+5, 255, 250], dtype = "uint8")
             
     # detect_color(self,frame) detects color regions between self.lower and self.upper.        
     def detect_color(self,frame):
@@ -238,7 +307,7 @@ if __name__ == '__main__':
 ## Detect the area and center position for each contour (color_detect02.py)
 - Modify `color_detect01.py` to detect the area and the center position for each colored object (a blue or yellow or green target).
 
-<a href="https://sites.google.com/site/ipbloit/2018/01/opencv05.jpg"><img src="/site/ipbloit/2018/01/opencv05.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/01/opencv05.jpg"><img src="https://sites.google.com/site/ipbloit/2018/01/opencv05.jpg" border="0" width="800"></a>
 - Copy ``color_detect01.py`` as ``color_detect02.py``.
 - Delete ``detect_color`` method from ``cv_control`` class.
 - Add ``extract_contours`` method and ``detect_contour_position`` method into the ``cv_control`` class.
@@ -321,7 +390,7 @@ class cv_control:
     # set lower and upper filter. 
     def set_filter(self,base_hvalue):
         self.lower = numpy.array([base_hvalue-5, 80, 50], dtype = "uint8")
-        self.upper = numpy.array([base_hvalue+5, 255, 230], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+5, 255, 250], dtype = "uint8")
     
     # returns contours array
     def extract_contours(self,frame):
@@ -443,7 +512,7 @@ if __name__ == '__main__':
 ## Shows vs-marker pos and orientation info transmitted from vision system(vsinfo01.py)
 - This program prints the parsed vs-marker information stored in the vs.markers dict.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs01.jpg"><img src="/site/ipbloit/2018/02/vs01.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/vs01.jpg"><img src="https://sites.google.com/site/ipbloit/2018/02/vs01.jpg" border="0" width="800"></a>
 
 - You can see the information of detected vs-marker on the command line terminal in the raspbian.
   - e.x. ``0 93.5 223.0 0.09053574604251853 -0.9958932064677039
@@ -530,7 +599,7 @@ if __name__ == "__main__":
 
 - This program calculates angle (degree) from obj1 to obj2 as shown in the following figure.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs02.jpg"><img src="/site/ipbloit/2018/02/vs02.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/vs02.jpg"><img src="https://sites.google.com/site/ipbloit/2018/02/vs02.jpg" border="0" width="800"></a>
 
 - Type (or copy and paste) the following code and save it as ``angle01.py``.
   - Assign the actual vs-marker pos and orientation information into the following code.
@@ -561,7 +630,7 @@ print("obj1_to_obj2:" + str(obj1_to_obj2))
 ## Calculate distance from obj1 to obj2(distance.py)
 - This program calculates distance between obj1 and obj2.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs03.jpg"><img src="/site/ipbloit/2018/02/vs03.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2018/02/vs03.jpg"><img src="https://sites.google.com/site/ipbloit/2018/02/vs03.jpg" border="0" width="800"></a>
 
 - Type (or copy and paste) the following code and save it as ``distance.py``.
   - Assign the actual vs-marker pos and orientation information into the following code.
@@ -889,7 +958,7 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 
 - Execute ``toward_target03.py``.
 
-## Gopigo approached and detect contours of the target(toward_target04.py)
+## Gopigo approaches and detects contours of the target(toward_target04.py)
 - Type (or copy and paste) the following code and save it as toward_target04.py.
 - **[Teaching Point!]** OIT students explain the detail of the following source code. 
 
@@ -916,7 +985,7 @@ class cv_control:
     
     def set_filter(self,base_hvalue):
         self.lower = numpy.array([base_hvalue-5, 80, 50], dtype = "uint8")
-        self.upper = numpy.array([base_hvalue+5, 255, 230], dtype = "uint8")
+        self.upper = numpy.array([base_hvalue+5, 255, 250], dtype = "uint8")
     
     def extract_contours(self,frame):
         image = numpy.copy(frame)
