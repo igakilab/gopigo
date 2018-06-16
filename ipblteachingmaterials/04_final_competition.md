@@ -1,4 +1,4 @@
-# Overview of the Real World Game Programming Shooting Competition Rule
+# Overview of the Real World Game Programming Shooting Competition Rule for minigame (2nd day) and final competition (final day)
 - Each team has 2 robots. One is Shooter, another is Guard.
 - Shooter shoots 3 targets many times.
   - Each field has 3 targets, yellow, green and blue.
@@ -30,22 +30,23 @@
 
 - yellow(point 1), green(point 2), blue(point 3), blue(point 3), green(point 4), yellow(point 5), yellow(point 5)...
   - That is, Shooter cannot gain a point if the shooter shoots same colored target sequentially.
-- If more 20 (minigame) or 200 (final competition) images are captured by a shooter, the judge program automatically deletes them. 
+- If more **20 (minigame) or 200 (final competition)** images are captured by a shooter, the judge program **automatically deletes them**.
 
 # Flow of Mini Game (Robots are controlled manually)(2nd day 11:00 AM)
 - Every team controls 2 robots (Shooter/Guard) **manually** with keyboard through wifi.
-  - Shooter robots shoot targets and Guard robots protect it .
+  - Shooter robots shoot targets and Guard robots protect it.
 
 ## Steps
 - **First**, both teams locate each robot at each start position.
 - Referee starts the judge program in the shooter's raspbian.
-  - Referee downloads the judge program ``wget http://bit.ly/judge_mini`` at the shooter's program (gopigo-python program) directory.
+  - Referee downloads the judge program ``wget http://bit.ly/judge_mini -O ipbl_judge_minigame.py`` at the shooter's program (gopigo-python program) directory.
   - **Note**
     - the gopigo-python program and the ipbl_judge...py should be located at same directory.
     - Images captured by the gopigo-python program are also saved at the directory.
   - Referee checks whether no image exists to be judged in the shooter's raspbian.
-  - Execute `sudo python ipbl_judge_minigame.py 30 75 105`
+  - Execute `sudo python ipbl_judge_minigame.py 30 75 105 TeamOraora`
     - 30 75 105 means default hue value of yellow, green and blue, respectively. In actual minigame, each team indicates each base h value for judge program.
+    - TeamOraora means a team name which does not include space character.
 - The team of Shooter offers wifi ip address of the Shooter.
   - Referee displays score.txt on the browser based on the wifi ip address.
     - `ipbl_judge_minigame.py` shows the shooter's score in the following url.
@@ -57,20 +58,20 @@
   - A robot goes out from the filed.
 - A game will end after 10 miniutes has elapsed.
 
-
 # Flow of Final Competition (Robots move autonomously)(Final Day AM)
 - Shooter and Guard robots achieve their objectives **autonomously**.
 
 ## Steps
 - **First**, both teams Locate each robot at each start position.
 - Referee starts the judge program in the shooter's raspbian.
-  - Referee downloads the judge program ``wget http://bit.ly/judge_final`` at the shooter's program (gopigo-python program) directory.
+  - Referee downloads the judge program ``wget http://bit.ly/judge_final -O ipbl_judge_final.py`` at the shooter's program (gopigo-python program) directory.
   - **Note**
     - the gopigo-python program and the ipbl_judge...py should be located at same directory.
     - Images captured by the gopigo-python program are also saved at the directory.
   - Referee checks whether no image exists to be judged in the shooter program's directory.
-  - Execute `sudo python ipbl_judge_final.py 30 75 105`
-    - 30 75 105 means default hue value of yellow, green and blue, respectively. In actual minigame, each team indicates each base h value for judge program.
+  - Execute `sudo python ipbl_judge_final.py 30 75 105 TeamDoraemon`
+    - 30 75 105 means default hue value of yellow, green and blue, respectively. In actual final competition, each team indicates each base h value for judge program.
+    - TeamDoraemon means a team name which does not include space character.
 - The team of Shooter offers wifi ip address of the Shooter.
   - Referee displays score.txt on the browser based on the wifi ip address.
     - `ipbl_judge_final.py` shows the shooter's score in the following url.
