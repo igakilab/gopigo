@@ -9,7 +9,4 @@ def change_color(color):
 pi = easygopigo3.EasyGoPiGo3()
 white = (255,255,255) #8bit RGB value
 change_color(white)
-change_color((255,0,255)) #magenta
 pi.close_eyes()
-
-
