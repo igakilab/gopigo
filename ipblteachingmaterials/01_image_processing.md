@@ -61,7 +61,7 @@ $ python opencv01.py
 
 -----
 ## Camera capture (opencv02.py)
-<a href="https://sites.google.com/site/ipbloit/2018/01/opencv02.jpg"><img src="/site/ipbloit/2018/01/opencv02.jpg" border="0" width="500"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/01/opencv02.jpg"><img src="/site/ipbloit/2019/01/opencv02.jpg" border="0" width="500"></a>
 - Reference: [PiCamera API](http://picamera.readthedocs.io/en/release-1.12/recipes1.html#capturing-consistent-images)
 - Type (or copy and paste) the following code and save it as ``opencv02.py``.
 
@@ -113,7 +113,7 @@ if __name__ == '__main__':
 
 -----
 ## Detect skin color region (opencv03.py)
-<a href="https://sites.google.com/site/ipbloit/2018/01/opencv03.jpg"><img src="/site/ipbloit/2018/01/opencv03.jpg" border="0" width="500"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/01/opencv03.jpg"><img src="/site/ipbloit/2019/01/opencv03.jpg" border="0" width="500"></a>
 - Copy ``opencv02.py`` as ``opencv03.py``.
 - Add ``import numpy``
 - Add ``cv_control`` class.
@@ -166,7 +166,7 @@ if __name__ == '__main__':
 
 -----
 ## Detect contours of skin color region (opencv04.py)
-<a href="https://sites.google.com/site/ipbloit/2018/01/opencv04.jpg"><img src="/site/ipbloit/2018/01/opencv04.jpg" border="0" width="500"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/01/opencv04.jpg"><img src="/site/ipbloit/2019/01/opencv04.jpg" border="0" width="500"></a>
 - Copy ``opencv03.py`` as ``opencv04.py``.
 - Replace ``detect_color(self,frame)`` method in the ``cv_control`` class
 
@@ -200,7 +200,7 @@ if __name__ == '__main__':
 
 -----
 ## Detect the area and center position for each contour (opencv05.py)
-<a href="https://sites.google.com/site/ipbloit/2018/01/opencv05.jpg"><img src="/site/ipbloit/2018/01/opencv05.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/01/opencv05.jpg"><img src="/site/ipbloit/2019/01/opencv05.jpg" border="0" width="800"></a>
 - Copy ``opencv04.py`` as ``opencv05.py``.
 - Delete ``detect_color`` method from ``cv_control`` class.
 - Add ``extract_contours`` method and ``detect_contour_position`` method into the ``cv_control`` class.
@@ -343,7 +343,7 @@ if __name__ == '__main__':
 
 # Image Processing on GoPiGo
 ## Capture the blue object (go_cv01.py)
-<a href="https://sites.google.com/site/ipbloit/2018/01/go_cv01.jpg"><img src="/site/ipbloit/2018/01/go_cv01.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/01/go_cv01.jpg"><img src="/site/ipbloit/2019/01/go_cv01.jpg" border="0" width="800"></a>
 - Copy ``opencv05.py`` as ``go_cv01.py`` 
 - Store the five images(``blue1.jpg``~``blue5.jpg``) which include the largest (>= 10000 px) blue object. 
 - Add the following ``gopigo_status`` class.

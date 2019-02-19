@@ -31,19 +31,19 @@
   - you can use gopigo without usb power adapter.
 - Power ON
   - Connecting USB power adapter or pushing the button over the micro-USB connector turns on the gopigo.
-<a href="https://sites.google.com/site/ipbloit/2018/-00/gopigoconnect.jpg"><img src="/site/ipbloit/2018/-00/gopigoconnect.jpg" border="0" width="320" height="230"></a>
+<img src="https://sites.google.com/site/ipbloit/2019/00/gopigoconnect.jpg" border="0" width="320" height="230">
 - Connect PC and gopigo (in the front) with LAN cable
 - Access Raspbian for Robots with Internet Explorer
   - Start Internet Explorer, and access http://192.168.0.2/
-<a href="https://sites.google.com/site/ipbloit/2018/-00/novncenter.jpg"><img src="/site/ipbloit/2018/-00/novncenter.jpg" border="0" width="320"></a>
+<img src="https://sites.google.com/site/ipbloit/2019/00/novncenter.jpg" border="0" width="320">
   - Click VNC icon(Launch VNC)
   - input Password [robots1234]
   - You can access Raspbian OS view.
-<a href="https://sites.google.com/site/ipbloit/2018/-00/raspbian1.jpg"><img src="/site/ipbloit/2018/-00/raspbian1.jpg" border="0" width="600"></a>
+<img src="https://sites.google.com/site/ipbloit/2019/00/raspbian1.jpg" border="0" width="600">
 - You can access Raspbian for Robots with UltraVNC.exe
   - Start UltraVNC Viewer
   - Input[``192.168.0.2:0``] and Connect.
-<a href="https://sites.google.com/site/ipbloit/2018/-00/ultravnc.jpg"><img src="/site/ipbloit/2018/-00/ultravnc.jpg" border="0" width="320"></a>
+<img src="https://sites.google.com/site/ipbloit/2019/00/ultravnc.jpg" border="0" width="320">
   - UltraVNC enables users to copy and paste text between windows pc and the raspbian.
   - I recommend to use wired connection(192.168.0.2) during development with UltraVNC.
 - Execute DI Software updates
@@ -53,7 +53,7 @@
   - Confirm SSID and input password.
   - Add
   - Connect in the Current Status.
-<a href="https://sites.google.com/site/ipbloit/2018/-00/wifisetting.jpg"><img src="/site/ipbloit/2018/-00/wifisetting.jpg" border="0" width="600"></a>
+<img src="https://sites.google.com/site/ipbloit/2019/00/wifisetting.jpg" border="0" width="600">
   - You can also access Raspbian with wifi IP address
 - Power OFF
   - Click Shutdown icon, and disconnect micro USB cable.
@@ -62,7 +62,7 @@
 ## Software in Raspbian
 ### Command line terminal
 - Click command line terminal icon in raspbian
-<a href="https://sites.google.com/site/ipbloit/2018/-00/commandline.jpg"><img src="/site/ipbloit/2018/-00/commandline.jpg" border="0" width="600"></a>
+<img src="https://sites.google.com/site/ipbloit/2019/00/commandline.jpg" border="0" width="600">
 - You can copy and paste all commands in this education materials.
   - Right click copy and paste also can be available.
   - You cannot copy and paste between windows and raspbian through noVNC.
@@ -77,7 +77,7 @@ $ geany [filename] &
 ```
 
 - You can run python program on terminal or geany. You can run python program for just pushing ``F5`` on geany.
-<a href="https://sites.google.com/site/ipbloit/2018/-00/geany.jpg"><img src="/site/ipbloit/2018/-00/geany.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/00/geany.jpg"><img src="/site/ipbloit/2019/00/geany.jpg" border="0" width="600"></a>
 
 ### Image Viewer
 - You can view images with using gpicview.
@@ -86,7 +86,7 @@ $ geany [filename] &
 $ gpicview [imagefilename]
 ```
 
-<a href="https://sites.google.com/site/ipbloit/2018/-00/gpicview.jpg"><img src="/site/ipbloit/2018/-00/gpicview.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/00/gpicview.jpg"><img src="/site/ipbloit/2019/00/gpicview.jpg" border="0" width="600"></a>
 
 # Try GoPiGo
 - We can use python API library for GoPiGo control.In the following, let's study how to use such APIs and basic python programming.
@@ -242,12 +242,12 @@ pi.close_eyes()
 - In this program, first, gopigo glows white for 5 seconds, and then gopigo glows magenta(255,0,255) for 5 seconds.
 
 ### Other LED control APIs
-- About LED control, you can use many methods as stated in the [gopigo3 API](http://gopigo3.readthedocs.io/en/master/api-basic.html#easygopigo3)
+- About LED control, you can use many methods as stated in the [gopigo3 API](https://gopigo3.readthedocs.io/en/master/api-basic/easygopigo3.html)
 - ``set_left_eye_color(color),set_right_eye_color(color), open_left_eye(), open_right_eye(), close_left_eye(), close_right_eye()``.
 
 -----
 ## Blocking Method and Non-Blocking Method
-- In the [gopigo API docs](http://gopigo3.readthedocs.io/en/master/api-basic.html#easygopigo3), Blocking method will wait for the GoPiGo3 robot to finish moving.Non-Blocking method will exit immediately while the GoPiGo3 robot will continue moving.
+- In the [gopigo API docs](https://gopigo3.readthedocs.io/en/master/api-basic/easygopigo3.html), Blocking method will wait for the GoPiGo3 robot to finish moving.Non-Blocking method will exit immediately while the GoPiGo3 robot will continue moving.
 
 -----
 ### Run and turn (run_turn03.py) (Non-Blocking)
@@ -326,7 +326,7 @@ curses.endwin()
 -----
 ### [***Exercise***] (key_control02.py)
 - Add ``back`` function into ``key_control01.py`` as ``key_control02.py``.
-  - See [gopigo API](http://gopigo3.readthedocs.io/en/master/api-basic.html#easygopigo3)
+  - See [gopigo API](https://gopigo3.readthedocs.io/en/master/api-basic/easygopigo3.html)
 - In ``key_control02.py`` , a user can back the gopigo with ``s`` key.
 
 -----

@@ -100,7 +100,7 @@ curses.endwin()
 - Execute `gopigo_key01.py`
 
 ## Speed Control
-- Add `egpi.set_speed(50)` after `egpi = easygopigo3.EasyGoPiGo3()` in the ``key_control01.py``.
+- Add `egpi.set_speed(50)` after `egpi = easygopigo3.EasyGoPiGo3()` in the ``gopigo_key01.py``.
 - `set_speed()` sets the speed of the Gopigo as shown in the [Gopigo API Doc](http://gopigo3.readthedocs.io/en/master/api-basic.html#easygopigo3.EasyGoPiGo3.set_speed).
 - In our PBL, you should set a value of the speed between **0~500**.
   - Note:Though you can set any positive value as the speed value, too big value may damage the gopigo.

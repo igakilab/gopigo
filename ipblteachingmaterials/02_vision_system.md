@@ -3,34 +3,29 @@
 - Connect USB camera to PC.
 - Change the setting about auto focus of the USB camera as the following image.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/logicool.jpg"><img src="/site/ipbloit/2018/02/logicool.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/logicool.jpg"><img src="https://sites.google.com/site/ipbloit/2019/02/logicool.jpg" border="0" width="800"></a>
 
-## eclipse project setting
-- Download [vision system.zip](https://sites.google.com/site/ipbloit/2018/02/vision%20system.zip).
-- Launch eclipse
-  - Execute ``C:\eclipse\eclipse.exe``
-- Import Project
-  - In [Import] Window, select [General->Projects from Folder or Archive] and click [Next] Button.
-  - In [Import Projects from File System or Archive] window, select ``vision system.zip``, unckeck ``[vision system.zip_expanded]``, and click [Finish] as follows.
+## Launch Visual Studio Code
+- Download [visionsystem.zip](https://sites.google.com/site/ipbloit/2019/02/visionsystem.zip).
+- Unzip visionsystem.zip.
+- Launch Visual Studio Code
+  - Execute ``C:\oit\vscode-portable-win64-1.31.0-1-ipbl\vscode-portable.exe``
+- Open vision system folder.
+  - [File]->[Open Folder]->Select unzipped visionsystem folder (named DetectMarkerServer-master)
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/eclipse_import.jpg"><img src="/site/ipbloit/2018/02/eclipse_import.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vscode_openfolder.jpg"><img src="https://sites.google.com/site/ipbloit/2019/02/vscode_openfolder.jpg" border="0" width="800"></a>
 
-  - It's OK, if ``vision system`` is added in the package explorer of eclipse.
-- Configure vm parameters
-  - Right click `src\DetectMarkerServer.java`->[Run As]->[Run Configurations].
-  - In [Run Configurations] window, select [Arguments] Tab, and input `-Xss64m -Xms64m -Xmx64m` in the [VM arguments] as follows.
-
-<a href="https://sites.google.com/site/ipbloit/2018/02/eclipse_run_configurations.jpg"><img src="/site/ipbloit/2018/02/eclipse_run_configurations.jpg" border="0" width="800"></a>
+  - It's OK, if ``DETECTMARKERSERVER-MASTER`` is added in the package explorer of vscode.
 
 ## Launch vision system
-- In the [Run Configurations], click [Run] button, or Right click `src\DetectMarkerServer.java`->[Run As]->[Java Application].
+- Select `src\DetectMarkerServer.java`->Press F5.
 - It's OK, if vs-marker is adequately detected.
 
 ## Trouble Shooting
 ### Camera does not work
 - Confirm ``src\capture\DSJCapture.java`` L30.
 - If your PC has only one USB camera, the following number should be ``0``.
-- ``this(listener, 2);//Camera No.`` 
+- ``this(listener, 1);//Camera No.`` 
 
 ### vs-marker detection is unstable
 - Confirm ``src\marker\MarkerDetector.java`` L20,L21
@@ -75,7 +70,7 @@ except KeyboardInterrupt:
 ```
 
 - Execute ``socket_client01.py``.
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs01.jpg"><img src="/site/ipbloit/2018/02/vs01.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vs01.jpg"><img src="/site/ipbloit/2019/02/vs01.jpg" border="0" width="800"></a>
 - You can see the information of detected vs-marker on the command line terminal in the raspbian.
   - e.x. ``response = 0 93.5 223.0 0.09053574604251853 -0.9958932064677039
   -the previous information means marker.getID() + " " + location.getX() + " " + location.getY() + " " + orientationX.getX() + " " + orientationY.getY()
@@ -203,7 +198,7 @@ print("obj1_to_obj2:" + str(obj1_to_obj2))
 - Execute ``check_angle01.py``
 - This program calculates angle (degree) from obj1 to obj2 as shown in the following figure.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs02.jpg"><img src="/site/ipbloit/2018/02/vs02.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vs02.jpg"><img src="/site/ipbloit/2019/02/vs02.jpg" border="0" width="800"></a>
 
 ## Gopigo turns to the target(vsgo01.py)
 - Type (or copy and paste) the following code and save it as ``vsgo01.py``.
@@ -434,7 +429,7 @@ print("distance_between_obj1_and_obj2:" + str(distance_between_obj1_and_obj2))
 - Execute ``calc_distance.py``
 - This program calculates distance between obj1 and obj2.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs03.jpg"><img src="/site/ipbloit/2018/02/vs03.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vs03.jpg"><img src="/site/ipbloit/2019/02/vs03.jpg" border="0" width="800"></a>
 
 -----
 ## Convert px value into gopigo's drive degree(convert_px_degree.py)
@@ -639,7 +634,7 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 - Execute ``check_angle02.py``
 - This program calculates angle for obj1(gopigo) to face the front of the obj2(target) as shown in the following figure.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs04.jpg"><img src="/site/ipbloit/2018/02/vs04.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vs04.jpg"><img src="/site/ipbloit/2019/02/vs04.jpg" border="0" width="800"></a>
 
 -----
 ## Gopigo approaches and faces the front of the target(vsgo05.py)
@@ -742,7 +737,7 @@ import cv2
 - When Gopigo faces the target, it shoots the target and saves the image named ``capture.jpg``.
 
 ## Gopigo shows contours of the target(vsgocv02.py)
-<a href="https://sites.google.com/site/ipbloit/2018/02/contours.jpg"><img src="/site/ipbloit/2018/02/contours.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/contours.jpg"><img src="/site/ipbloit/2019/02/contours.jpg" border="0" width="800"></a>
 
 - Copy ``vsgocv01.py`` as ``vsgocv02.py``
 - Add the following ``cv_control`` class in the ``vsgocv02.py``.
