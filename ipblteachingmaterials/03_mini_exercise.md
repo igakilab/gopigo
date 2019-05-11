@@ -17,7 +17,7 @@
 ## Preparation in the raspbian
 ### Command line terminal
 - Click command line terminal icon in raspbian
-<a href="https://sites.google.com/site/ipbloit/2018/-00/commandline.jpg"><img src="https://sites.google.com/site/ipbloit/2018/-00/commandline.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/00/commandline.jpg"><img src="https://sites.google.com/site/ipbloit/2019/00/commandline.jpg" border="0" width="600"></a>
 - You can copy and paste all commands in this education materials.
   - Right click copy and paste also can be available.
   - You cannot copy and paste between windows and raspbian through Internet explorer.
@@ -32,7 +32,7 @@ $ geany [filename] &
 ```
 
 - You can run python program on terminal or geany. You can run python program for just pushing ``F5`` on geany.
-<a href="https://sites.google.com/site/ipbloit/2018/-00/geany.jpg"><img src="https://sites.google.com/site/ipbloit/2018/-00/geany.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/00/geany.jpg"><img src="https://sites.google.com/site/ipbloit/2019/00/geany.jpg" border="0" width="600"></a>
 
 ### Image Viewer
 - You can view images with using gpicview.
@@ -41,7 +41,7 @@ $ geany [filename] &
 $ gpicview [imagefilename]
 ```
 
-<a href="https://sites.google.com/site/ipbloit/2018/-00/gpicview.jpg"><img src="https://sites.google.com/site/ipbloit/2018/-00/gpicview.jpg" border="0" width="600"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/00/gpicview.jpg"><img src="https://sites.google.com/site/ipbloit/2019/00/gpicview.jpg" border="0" width="600"></a>
 
 
 # Gopigo control
@@ -101,12 +101,12 @@ curses.endwin()
 
 ## Speed Control
 - Add `egpi.set_speed(50)` after `egpi = easygopigo3.EasyGoPiGo3()` in the ``gopigo_key01.py``.
-- `set_speed()` sets the speed of the Gopigo as shown in the [Gopigo API Doc](http://gopigo3.readthedocs.io/en/master/api-basic.html#easygopigo3.EasyGoPiGo3.set_speed).
+- `set_speed()` sets the speed of the Gopigo as shown in the [Gopigo API Doc](https://gopigo3.readthedocs.io/en/master/api-basic/easygopigo3.html#easygopigo3.EasyGoPiGo3.set_speed).
 - In our PBL, you should set a value of the speed between **0~500**.
   - Note:Though you can set any positive value as the speed value, too big value may damage the gopigo.
 
 ## Blocking method, Non-Blocking method
-- In the [gopigo API docs](http://gopigo3.readthedocs.io/en/master/api-basic.html#easygopigo3), Blocking method will wait for the GoPiGo3 robot to finish moving.Non-Blocking method will exit immediately while the GoPiGo3 robot will continue moving.
+- In the [gopigo API docs](https://gopigo3.readthedocs.io/en/master/api-basic/easygopigo3.html), Blocking method will wait for the GoPiGo3 robot to finish moving.Non-Blocking method will exit immediately while the GoPiGo3 robot will continue moving.
 - Copy `gopigo_key01.py` as `gopigo_key02.py`.
 - Replace the `while` block into the following code snippets.
 - **[Teaching Point!]** OIT students explain the detail of the following source code. Especially OIT students should teach differences between forward() and drive_degrees, and right() and turn_degrees in the view point of blocking and non-blocking methods.
@@ -136,7 +136,7 @@ while True:
 - If you push the `b` key, led of the gopigo blinks in blue.
 - If you push the `y` key, led of the gopigo blinks in yellow.
 - If you push the `g` key, led of the gopigo blinks in green.
-- You refer to the `led01~03.py` in the [pre-study materials](https://sites.google.com/site/ipbloit/2018/-00).
+- You refer to the `led01~03.py` in the [pre-study materials](https://sites.google.com/site/ipbloit/2019/00).
 - **[Teaching Point]** OIT students should teach how to control led of the gopigo.
 - In this PBL, you can use these leds freely for decorating gopigo.
 
@@ -144,7 +144,7 @@ while True:
 ## Use picamera
 - Type (or copy and paste) the following code and save it as ``gopigo_key04.py``
 - You can control gopigo and pycamera with keyboard.
-- You can use this program for **mini game** (on Tuesday am).
+- You can use this program for **mini game**.
   - In order to get higher score, you should customize this program with the following multiple opencv functions.
 
 ```python
@@ -301,13 +301,13 @@ if __name__ == '__main__':
 
 ## Detect Colored Objects with color_picker.py
 - Modify `color_detect01.py` to detect red/blue/yellow/green targets.
-  - Identify base H value (for HSV upper/lower filter) with using `color_picker.py` in [pre-study material about opencv](https://sites.google.com/site/ipbloit/2018/01).
+  - Identify base H value (for HSV upper/lower filter) with using `color_picker.py` in [pre-study material about opencv](https://sites.google.com/site/ipbloit/2019/01).
   - **[Teaching Point]** How to use `color_picker.py`.
 
 ## Detect the area and center position for each contour (color_detect02.py)
 - Modify `color_detect01.py` to detect the area and the center position for each colored object (a blue or yellow or green target).
 
-<a href="https://sites.google.com/site/ipbloit/2018/01/opencv05.jpg"><img src="https://sites.google.com/site/ipbloit/2018/01/opencv05.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/01/opencv05.jpg"><img src="https://sites.google.com/site/ipbloit/2019/01/opencv05.jpg" border="0" width="800"></a>
 - Copy ``color_detect01.py`` as ``color_detect02.py``.
 - Delete ``detect_color`` method from ``cv_control`` class.
 - Add ``extract_contours`` method and ``detect_contour_position`` method into the ``cv_control`` class.
@@ -503,7 +503,7 @@ if __name__ == '__main__':
 ## preperation
 - Connect between note PC and the USB web camera.
   - **[Teaching Point]** oit students should teach what is the vision system.
-  - **[Teaching Point]** oit students should teach how to run vision system based on the [pre-study material about vision system](https://sites.google.com/site/ipbloit/2018/02).
+  - **[Teaching Point]** oit students should teach how to run vision system based on the [pre-study material about vision system](https://sites.google.com/site/ipbloit/2019/02).
 - Check IP address of the vision system (note pc).
 - Paste the vs-marker on gopigo.
   - vs-marker no.1 is for shooter.
@@ -512,7 +512,7 @@ if __name__ == '__main__':
 ## Shows vs-marker pos and orientation info transmitted from vision system(vsinfo01.py)
 - This program prints the parsed vs-marker information stored in the vs.markers dict.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs01.jpg"><img src="https://sites.google.com/site/ipbloit/2018/02/vs01.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vs01.jpg"><img src="https://sites.google.com/site/ipbloit/2019/02/vs01.jpg" border="0" width="800"></a>
 
 - You can see the information of detected vs-marker on the command line terminal in the raspbian.
   - e.x. ``0 93.5 223.0 0.09053574604251853 -0.9958932064677039
@@ -599,7 +599,7 @@ if __name__ == "__main__":
 
 - This program calculates angle (degree) from obj1 to obj2 as shown in the following figure.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs02.jpg"><img src="https://sites.google.com/site/ipbloit/2018/02/vs02.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vs02.jpg"><img src="https://sites.google.com/site/ipbloit/2019/02/vs02.jpg" border="0" width="800"></a>
 
 - Type (or copy and paste) the following code and save it as ``angle01.py``.
   - Assign the actual vs-marker pos and orientation information into the following code.
@@ -630,7 +630,7 @@ print("obj1_to_obj2:" + str(obj1_to_obj2))
 ## Calculate distance from obj1 to obj2(distance.py)
 - This program calculates distance between obj1 and obj2.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs03.jpg"><img src="https://sites.google.com/site/ipbloit/2018/02/vs03.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vs03.jpg"><img src="https://sites.google.com/site/ipbloit/2019/02/vs03.jpg" border="0" width="800"></a>
 
 - Type (or copy and paste) the following code and save it as ``distance.py``.
   - Assign the actual vs-marker pos and orientation information into the following code.
@@ -659,7 +659,7 @@ print("distance_between_obj1_and_obj2:" + str(distance_between_obj1_and_obj2))
 ## Convert px value into gopigo’s drive degree(px_to_degree.py)
 
 - gopigo's drive_degree() requires degree of the motor.
-  - http://gopigo3.readthedocs.io/en/latest/api-basic.html#easygopigo3.EasyGoPiGo3.drive_degrees
+  - https://gopigo3.readthedocs.io/en/master/api-basic/easygopigo3.html#easygopigo3.EasyGoPiGo3.drive_degrees
 - Vision system offers only px value for each marker from 640 * 480 images captured by web camera.
 - In order to combine vision system and gopigo, you must convert px value into gopigo's drive degree value.
 - Type (or copy and paste) the following code and save it as ``px_to_degree.py``.
@@ -908,7 +908,7 @@ if __name__ == "__main__":
 ## Calculate the angle for obj1(gopigo) to face the front of the obj2(target) (angle02.py)
 - This program calculates angle for obj1(gopigo) to face the front of the obj2(target) as shown in the following figure.
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/vs04.jpg"><img src="https://sites.google.com/site/ipbloit/2018/02/vs04.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/vs04.jpg"><img src="https://sites.google.com/site/ipbloit/2019/02/vs04.jpg" border="0" width="800"></a>
 
 - Type (or copy and paste) the following code and save it as angle02.py.
   - Assign the actual vs-marker pos and orientation information into the following code.
@@ -963,7 +963,7 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 - **[Teaching Point!]** OIT students explain the detail of the following source code. 
 
 
-<a href="https://sites.google.com/site/ipbloit/2018/02/contours.jpg"><img src="https://sites.google.com/site/ipbloit/2018/02/contours.jpg" border="0" width="800"></a>
+<a href="https://sites.google.com/site/ipbloit/2019/02/contours.jpg"><img src="https://sites.google.com/site/ipbloit/2019/02/contours.jpg" border="0" width="800"></a>
 
 ```python
 import curses
@@ -1136,8 +1136,8 @@ if __name__ == "__main__":
 ```
 
 - You have got every knowledge and technique to develop gopigo robot program.
-- Next, check [the minigame and final competition rules](https://sites.google.com/site/ipbloit/2018/04).
-- Develop gopigo robots for mini game until Tuesday Morning!
+- Next, check [the minigame rule](https://sites.google.com/site/ipbloit/2019/04).
+- Let's develop gopigo robots for mini game.
 - Have fun!
 
 

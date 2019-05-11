@@ -9,10 +9,11 @@
   - batteries * 8
     - each gopigo requires 8 batteries
   - USB power adapter for raspberry pi
+  - LAN Cable
 - Software
   - OS: Windows
     - Microsoft Office
-    - eclipse
+    - visual studio code
     - vision system
     - UltraVNC
     - RLogin
@@ -33,6 +34,9 @@
   - Connecting USB power adapter or pushing the button over the micro-USB connector turns on the gopigo.
 <img src="https://sites.google.com/site/ipbloit/2019/00/gopigoconnect.jpg" border="0" width="320" height="230">
 - Connect PC and gopigo (in the front) with LAN cable
+  - Change Wired Network Settings as follows
+    - PC and gopigo must belong the same network segment.
+<img src="https://sites.google.com/site/ipbloit/2019/00/wirednetworksettings.jpg" border="0" width="600">
 - Access Raspbian for Robots with Internet Explorer
   - Start Internet Explorer, and access http://192.168.0.2/
 <img src="https://sites.google.com/site/ipbloit/2019/00/novncenter.jpg" border="0" width="320">
@@ -90,7 +94,7 @@ $ gpicview [imagefilename]
 
 # Try GoPiGo
 - We can use python API library for GoPiGo control.In the following, let's study how to use such APIs and basic python programming.
-  - http://gopigo3.readthedocs.io/en/master/api-basic.html#easygopigo3
+  - https://gopigo3.readthedocs.io/en/master/api-basic/easygopigo3.html
 -----
 ## Simple GoPiGo API
 ### Run 360 degree (run360_01.py)
