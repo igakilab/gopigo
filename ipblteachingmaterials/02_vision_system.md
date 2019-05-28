@@ -641,7 +641,7 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 - Add the following code into the ``vision_system`` class in the ``vision_system.py``
 
 ```python
-    # Gopigo(obj1) and obj2 face each other if gopigo rotates based on the result of this method(degree).
+    # Gopigo(obj1) rotates based on the result of this method(degree) to face obj2(target).
     def calc_face_angle(self,obj1,obj2):
         opposite_orientation_of_obj2 = numpy.rad2deg(math.atan2(obj2[3]*-1,obj2[2]*-1))
         degree_of_obj1 = numpy.rad2deg(math.atan2(obj1[3],obj1[2]))

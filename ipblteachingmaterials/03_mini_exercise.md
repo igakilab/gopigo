@@ -723,11 +723,11 @@ if __name__ == "__main__":
     print("px per degree is:"+str(degree/distance_px))
 ```
 
-## Gopigo approaches to the target(vision_system.py and toward_target02.py)
-- Gopigo approaches to a target with vision_system.py and toward_target02.py.
+## Gopigo approaches a target(vision_system.py and toward_target02.py)
+- Gopigo approaches a target with using vision_system.py and toward_target02.py.
 - First, type or copy and paste the following code, and save it as `vision_system.py`.
   - If you already have `vision_system.py` in your directory, overwrite it.
-  - Select one target, and insert the vs-marker id of the target and your gopigo in `vision_system` class.
+  - Select one target, and insert the vs-marker ids of the target and your gopigo in `vision_system` class.
 - **[Teaching Point!]** OIT students explain the detail of the following source code. 
 
 ```python
@@ -748,7 +748,7 @@ class vision_system:
         # ??,?? are vs-marker id
         # each marker has 4 values (x,y,orientationx,orientationy)
         # You can add the marker info dict. 
-        # e.x.{1:[],6:[],8:[]}
+        # ex.{1:[],6:[],8:[]}
         self.markers = {??:[],??:[]}
         
         self.updated = datetime.datetime.now()
@@ -938,7 +938,7 @@ print("obj1_face_obj2:" + str(obj1_face_obj2))
 
 
 ```python
-    # Gopigo(obj1) and obj2 face each other if gopigo rotates based on the result of this method(degree).
+    # Gopigo(obj1) rotates based on the result of this method(degree) to face obj2(target).
     def calc_face_angle(self,obj1,obj2):
         opposite_orientation_of_obj2 = numpy.rad2deg(math.atan2(obj2[3]*-1,obj2[2]*-1))
         degree_of_obj1 = numpy.rad2deg(math.atan2(obj1[3],obj1[2]))
@@ -1135,8 +1135,8 @@ if __name__ == "__main__":
     vs.socket.close()
 ```
 
-- You have got every knowledge and technique to develop gopigo robot program.
-- Next, check [the minigame rule](https://sites.google.com/site/ipbloit/2019/04).
+- You have got every knowledge and technique to develop autonomous gopigo robot program.
+- Next, check [the minigame](https://sites.google.com/site/ipbloit/2019/04).
 - Let's develop gopigo robots for mini game.
 - Have fun!
 

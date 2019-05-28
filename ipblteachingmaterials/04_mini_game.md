@@ -1,9 +1,9 @@
-# Overview of the Real World Game Programming Shooting Competition Rule for minigame (2nd day)
+# Overview of the Real World Game Programming Shooting Competition Rule for minigame
 - Each team has 2 robots. One is Shooter, another is Guard.
 - Shooter shoots photos of 3 targets many times with picamera.
   - Each field has 3 targets, yellow, green and blue.
 - Guard protects them not to be shot from Shooter.
-- In a mini game, let's play an in-team match with a Shooter / Guard robot
+- In a mini game, let's play an in-team match with a Shooter / Guard robot.
 
 ## Field
 - The following figure represents the competition field (1.5m * 2.5m).
@@ -32,10 +32,11 @@
 
 # Flow of Mini Game (Robots are controlled manually)
 - Let's controls 2 robots (Shooter/Guard) **manually** with keyboard through wifi.
-  - A Shooter robot shoots targets and a Guard robot prevents targets from being shot by the shooter robot.
+  - A shooter robot shoots multiple targets and a Guard robot prevents targets from being shot by the shooter robot.
 
 ## Steps
-- **First**, locate each robot at each start position.
+- **First**, call a teaching assistant to play a mini game.
+- Locate each robot at each start position.
 - Referee starts the judge program in the shooter's raspbian.
   - Referee downloads the judge program ``wget http://bit.ly/judge_mini -O ipbl_judge_minigame.py`` at the shooter's program (gopigo-python program) directory.
   - **Note**
